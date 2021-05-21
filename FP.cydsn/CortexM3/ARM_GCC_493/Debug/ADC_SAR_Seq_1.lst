@@ -1,0 +1,3497 @@
+ARM GAS  C:\Users\chris\AppData\Local\Temp\ccQmEsxZ.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.file	"ADC_SAR_Seq_1.c"
+  15              		.text
+  16              	.Ltext0:
+  17              		.cfi_sections	.debug_frame
+  18              		.section	.text.ADC_SAR_Seq_1_Disable,"ax",%progbits
+  19              		.align	2
+  20              		.global	ADC_SAR_Seq_1_Disable
+  21              		.thumb
+  22              		.thumb_func
+  23              		.type	ADC_SAR_Seq_1_Disable, %function
+  24              	ADC_SAR_Seq_1_Disable:
+  25              	.LFB0:
+  26              		.file 1 ".\\Generated_Source\\PSoC5\\ADC_SAR_Seq_1.c"
+   1:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** /*******************************************************************************
+   2:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** * File Name: ADC_SAR_Seq_1.c
+   3:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** * Version 2.0
+   4:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *
+   5:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** * Description:
+   6:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *  This file provides the API functionality of the ADC SAR Sequencer Component
+   7:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *
+   8:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** * Note:
+   9:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *  None
+  10:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *
+  11:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** ********************************************************************************
+  12:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** * Copyright 2012-2015, Cypress Semiconductor Corporation.  All rights reserved.
+  13:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** * You may use this file only in accordance with the license, terms, conditions,
+  14:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** * disclaimers, and limitations in the end user license agreement accompanying
+  15:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** * the software package with which this file was provided.
+  16:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *******************************************************************************/
+  17:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** 
+  18:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** #include "ADC_SAR_Seq_1.h"
+  19:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** #if(ADC_SAR_Seq_1_IRQ_REMOVE == 0u)
+  20:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c ****     #include "ADC_SAR_Seq_1_IRQ.h"
+  21:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** #endif   /* End ADC_SAR_Seq_1_IRQ_REMOVE */
+  22:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** 
+  23:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** int16  ADC_SAR_Seq_1_finalArray[ADC_SAR_Seq_1_NUMBER_OF_CHANNELS];
+  24:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** uint32 ADC_SAR_Seq_1_initVar = 0u;
+  25:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** static uint8 ADC_SAR_Seq_1_tempChan;
+  26:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** static uint8 ADC_SAR_Seq_1_finalChan;
+  27:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** static uint8 ADC_SAR_Seq_1_tempTD = CY_DMA_INVALID_TD;
+  28:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** static uint8 ADC_SAR_Seq_1_finalTD = CY_DMA_INVALID_TD;
+  29:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** 
+  30:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** 
+  31:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** /****************************************************************************
+ARM GAS  C:\Users\chris\AppData\Local\Temp\ccQmEsxZ.s 			page 2
+
+
+  32:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** * Function Name: ADC_SAR_Seq_1_Disable()
+  33:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *****************************************************************************
+  34:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *
+  35:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** * Summary:
+  36:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *  Disables the component without disabling the ADC SAR.
+  37:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *
+  38:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** * Parameters:
+  39:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *  None.
+  40:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *
+  41:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** * Return:
+  42:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *  None.
+  43:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *
+  44:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** * Side Effects:
+  45:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *  None.
+  46:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *
+  47:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** * Reentrant:
+  48:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *  No.
+  49:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *
+  50:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** ****************************************************************************/
+  51:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** void ADC_SAR_Seq_1_Disable(void)
+  52:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** {
+  27              		.loc 1 52 0
+  28              		.cfi_startproc
+  29              		@ args = 0, pretend = 0, frame = 0
+  30              		@ frame_needed = 0, uses_anonymous_args = 0
+  31 0000 70B5     		push	{r4, r5, r6, lr}
+  32              		.cfi_def_cfa_offset 16
+  33              		.cfi_offset 4, -16
+  34              		.cfi_offset 5, -12
+  35              		.cfi_offset 6, -8
+  36              		.cfi_offset 14, -4
+  53:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c ****     ADC_SAR_Seq_1_CONTROL_REG &= ((uint8)(~ADC_SAR_Seq_1_BASE_COMPONENT_ENABLE));
+  37              		.loc 1 53 0
+  38 0002 0B4A     		ldr	r2, .L3
+  39 0004 1378     		ldrb	r3, [r2]	@ zero_extendqisi2
+  40 0006 03F0FE03 		and	r3, r3, #254
+  41 000a 1370     		strb	r3, [r2]
+  54:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** 
+  55:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c ****     (void) CyDmaChDisable(ADC_SAR_Seq_1_tempChan);
+  42              		.loc 1 55 0
+  43 000c 094E     		ldr	r6, .L3+4
+  44 000e 3078     		ldrb	r0, [r6]	@ zero_extendqisi2
+  45 0010 FFF7FEFF 		bl	CyDmaChDisable
+  46              	.LVL0:
+  56:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c ****     CyDmaTdFree(ADC_SAR_Seq_1_tempTD);
+  47              		.loc 1 56 0
+  48 0014 084C     		ldr	r4, .L3+8
+  49 0016 2078     		ldrb	r0, [r4]	@ zero_extendqisi2
+  50 0018 FFF7FEFF 		bl	CyDmaTdFree
+  51              	.LVL1:
+  57:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c ****     ADC_SAR_Seq_1_tempTD = CY_DMA_INVALID_TD;
+  52              		.loc 1 57 0
+  53 001c FF25     		movs	r5, #255
+  54 001e 2570     		strb	r5, [r4]
+  58:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** 
+  59:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c ****     (void) CyDmaChDisable(ADC_SAR_Seq_1_finalChan);
+  55              		.loc 1 59 0
+ARM GAS  C:\Users\chris\AppData\Local\Temp\ccQmEsxZ.s 			page 3
+
+
+  56 0020 7078     		ldrb	r0, [r6, #1]	@ zero_extendqisi2
+  57 0022 FFF7FEFF 		bl	CyDmaChDisable
+  58              	.LVL2:
+  60:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c ****     CyDmaTdFree(ADC_SAR_Seq_1_finalTD);
+  59              		.loc 1 60 0
+  60 0026 6078     		ldrb	r0, [r4, #1]	@ zero_extendqisi2
+  61 0028 FFF7FEFF 		bl	CyDmaTdFree
+  62              	.LVL3:
+  61:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c ****     ADC_SAR_Seq_1_finalTD = CY_DMA_INVALID_TD;
+  63              		.loc 1 61 0
+  64 002c 6570     		strb	r5, [r4, #1]
+  65 002e 70BD     		pop	{r4, r5, r6, pc}
+  66              	.L4:
+  67              		.align	2
+  68              	.L3:
+  69 0030 72640040 		.word	1073767538
+  70 0034 00000000 		.word	.LANCHOR0
+  71 0038 00000000 		.word	.LANCHOR1
+  72              		.cfi_endproc
+  73              	.LFE0:
+  74              		.size	ADC_SAR_Seq_1_Disable, .-ADC_SAR_Seq_1_Disable
+  75              		.section	.text.ADC_SAR_Seq_1_Init,"ax",%progbits
+  76              		.align	2
+  77              		.global	ADC_SAR_Seq_1_Init
+  78              		.thumb
+  79              		.thumb_func
+  80              		.type	ADC_SAR_Seq_1_Init, %function
+  81              	ADC_SAR_Seq_1_Init:
+  82              	.LFB1:
+  62:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** }
+  63:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** 
+  64:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** 
+  65:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** /*******************************************************************************
+  66:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** * Function Name: ADC_SAR_Seq_1_Init
+  67:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** ********************************************************************************
+  68:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *
+  69:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** * Summary:
+  70:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *  Inits channels for DMA transfer. Provides loading period to the AMUX address
+  71:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *  selection counter
+  72:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *
+  73:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** * Parameters:
+  74:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *  None.
+  75:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *
+  76:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** * Return:
+  77:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *  None.
+  78:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *
+  79:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** * Reentrant:
+  80:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *  No.
+  81:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *
+  82:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *******************************************************************************/
+  83:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** void ADC_SAR_Seq_1_Init(void)
+  84:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** {
+  83              		.loc 1 84 0
+  84              		.cfi_startproc
+  85              		@ args = 0, pretend = 0, frame = 0
+  86              		@ frame_needed = 0, uses_anonymous_args = 0
+  87 0000 10B5     		push	{r4, lr}
+ARM GAS  C:\Users\chris\AppData\Local\Temp\ccQmEsxZ.s 			page 4
+
+
+  88              		.cfi_def_cfa_offset 8
+  89              		.cfi_offset 4, -8
+  90              		.cfi_offset 14, -4
+  85:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c ****     /* Init DMA, 2 bytes bursts, each burst requires a request */
+  86:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c ****     ADC_SAR_Seq_1_tempChan = ADC_SAR_Seq_1_TempBuf_DmaInitialize(ADC_SAR_Seq_1_TEMP_BYTES_PER_BURST
+  91              		.loc 1 86 0
+  92 0002 0220     		movs	r0, #2
+  93 0004 0121     		movs	r1, #1
+  94 0006 4FF48042 		mov	r2, #16384
+  95 000a 41F6FF73 		movw	r3, #8191
+  96 000e FFF7FEFF 		bl	ADC_SAR_Seq_1_TempBuf_DmaInitialize
+  97              	.LVL4:
+  98 0012 084C     		ldr	r4, .L7
+  99 0014 2070     		strb	r0, [r4]
+  87:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c ****         ADC_SAR_Seq_1_REQUEST_PER_BURST, (uint16)(HI16(CYDEV_PERIPH_BASE)), (uint16)(HI16(CYDEV_SRA
+  88:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** 
+  89:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c ****     /* Init DMA, (ADC_SAR_Seq_1_NUMBER_OF_CHANNELS << 1u) bytes bursts, each burst requires a reque
+  90:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c ****     ADC_SAR_Seq_1_finalChan = ADC_SAR_Seq_1_FinalBuf_DmaInitialize((uint8)ADC_SAR_Seq_1_FINAL_BYTES
+ 100              		.loc 1 90 0
+ 101 0016 0220     		movs	r0, #2
+ 102 0018 0121     		movs	r1, #1
+ 103 001a 41F6FF72 		movw	r2, #8191
+ 104 001e 1346     		mov	r3, r2
+ 105 0020 FFF7FEFF 		bl	ADC_SAR_Seq_1_FinalBuf_DmaInitialize
+ 106              	.LVL5:
+ 107 0024 6070     		strb	r0, [r4, #1]
+  91:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c ****         ADC_SAR_Seq_1_REQUEST_PER_BURST, (uint16)(HI16(CYDEV_SRAM_BASE)), (uint16)(HI16(CYDEV_SRAM_
+  92:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** 
+  93:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c ****     #if(ADC_SAR_Seq_1_IRQ_REMOVE == 0u)
+  94:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c ****         /* Set the ISR to point to the ADC_SAR_Seq_1_IRQ Interrupt. */
+  95:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c ****         ADC_SAR_Seq_1_IRQ_SetVector(&ADC_SAR_Seq_1_ISR);
+ 108              		.loc 1 95 0
+ 109 0026 0448     		ldr	r0, .L7+4
+ 110 0028 FFF7FEFF 		bl	ADC_SAR_Seq_1_IRQ_SetVector
+ 111              	.LVL6:
+  96:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c ****         /* Set the priority. */
+  97:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c ****         ADC_SAR_Seq_1_IRQ_SetPriority((uint8)ADC_SAR_Seq_1_INTC_NUMBER);
+ 112              		.loc 1 97 0
+ 113 002c 0220     		movs	r0, #2
+ 114 002e FFF7FEFF 		bl	ADC_SAR_Seq_1_IRQ_SetPriority
+ 115              	.LVL7:
+ 116 0032 10BD     		pop	{r4, pc}
+ 117              	.L8:
+ 118              		.align	2
+ 119              	.L7:
+ 120 0034 00000000 		.word	.LANCHOR0
+ 121 0038 00000000 		.word	ADC_SAR_Seq_1_ISR
+ 122              		.cfi_endproc
+ 123              	.LFE1:
+ 124              		.size	ADC_SAR_Seq_1_Init, .-ADC_SAR_Seq_1_Init
+ 125              		.section	.text.ADC_SAR_Seq_1_Enable,"ax",%progbits
+ 126              		.align	2
+ 127              		.global	ADC_SAR_Seq_1_Enable
+ 128              		.thumb
+ 129              		.thumb_func
+ 130              		.type	ADC_SAR_Seq_1_Enable, %function
+ 131              	ADC_SAR_Seq_1_Enable:
+ARM GAS  C:\Users\chris\AppData\Local\Temp\ccQmEsxZ.s 			page 5
+
+
+ 132              	.LFB2:
+  98:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c ****     #endif   /* End ADC_SAR_Seq_1_IRQ_REMOVE */
+  99:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** 
+ 100:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** }
+ 101:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** 
+ 102:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** 
+ 103:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** /*******************************************************************************
+ 104:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** * Function Name: ADC_SAR_Seq_1_Enable
+ 105:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** ********************************************************************************
+ 106:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *
+ 107:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** * Summary:
+ 108:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *  Enables DMA channels, address selection counter and FSM of Base component
+ 109:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *
+ 110:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** * Parameters:
+ 111:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *  None.
+ 112:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *
+ 113:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** * Return:
+ 114:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *  None.
+ 115:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *
+ 116:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** * Side Effects:
+ 117:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *  None.
+ 118:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *
+ 119:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** * Reentrant:
+ 120:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *  No.
+ 121:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *
+ 122:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *******************************************************************************/
+ 123:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** void ADC_SAR_Seq_1_Enable(void)
+ 124:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** {
+ 133              		.loc 1 124 0
+ 134              		.cfi_startproc
+ 135              		@ args = 0, pretend = 0, frame = 0
+ 136              		@ frame_needed = 0, uses_anonymous_args = 0
+ 137 0000 70B5     		push	{r4, r5, r6, lr}
+ 138              		.cfi_def_cfa_offset 16
+ 139              		.cfi_offset 4, -16
+ 140              		.cfi_offset 5, -12
+ 141              		.cfi_offset 6, -8
+ 142              		.cfi_offset 14, -4
+ 125:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c ****     uint8 enableInterrupts;
+ 126:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** 
+ 127:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c ****     static int16 ADC_SAR_Seq_1_tempArray[ADC_SAR_Seq_1_NUMBER_OF_CHANNELS];
+ 128:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c ****     
+ 129:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c ****     (void)CyDmaClearPendingDrq(ADC_SAR_Seq_1_tempChan);
+ 143              		.loc 1 129 0
+ 144 0002 2C4C     		ldr	r4, .L13
+ 145 0004 2078     		ldrb	r0, [r4]	@ zero_extendqisi2
+ 146 0006 FFF7FEFF 		bl	CyDmaClearPendingDrq
+ 147              	.LVL8:
+ 130:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c ****     (void)CyDmaClearPendingDrq(ADC_SAR_Seq_1_finalChan);
+ 148              		.loc 1 130 0
+ 149 000a 6078     		ldrb	r0, [r4, #1]	@ zero_extendqisi2
+ 150 000c FFF7FEFF 		bl	CyDmaClearPendingDrq
+ 151              	.LVL9:
+ 131:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c ****     
+ 132:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c ****     
+ 133:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c ****     /* Provides initialization procedure for the TempBuf DMA
+ 134:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c ****     * Configure this Td as follows:
+ARM GAS  C:\Users\chris\AppData\Local\Temp\ccQmEsxZ.s 			page 6
+
+
+ 135:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c ****     *  - The TD is looping on itself
+ 136:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c ****     *  - Increment the destination address, but not the source address
+ 137:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c ****     */
+ 138:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** 
+ 139:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c ****     if (ADC_SAR_Seq_1_tempTD == DMA_INVALID_TD)
+ 152              		.loc 1 139 0
+ 153 0010 294B     		ldr	r3, .L13+4
+ 154 0012 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 155 0014 FF2B     		cmp	r3, #255
+ 156 0016 03D1     		bne	.L10
+ 140:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c ****     {
+ 141:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c ****         ADC_SAR_Seq_1_tempTD = CyDmaTdAllocate();
+ 157              		.loc 1 141 0
+ 158 0018 FFF7FEFF 		bl	CyDmaTdAllocate
+ 159              	.LVL10:
+ 160 001c 264B     		ldr	r3, .L13+4
+ 161 001e 1870     		strb	r0, [r3]
+ 162              	.L10:
+ 142:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c ****     }
+ 143:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** 
+ 144:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c ****     (void) CyDmaTdSetConfiguration(ADC_SAR_Seq_1_tempTD, ADC_SAR_Seq_1_TEMP_TRANSFER_COUNT,
+ 163              		.loc 1 144 0
+ 164 0020 254D     		ldr	r5, .L13+4
+ 165 0022 2A78     		ldrb	r2, [r5]	@ zero_extendqisi2
+ 166 0024 1046     		mov	r0, r2
+ 167 0026 0221     		movs	r1, #2
+ 168 0028 0623     		movs	r3, #6
+ 169 002a FFF7FEFF 		bl	CyDmaTdSetConfiguration
+ 170              	.LVL11:
+ 145:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c ****         ADC_SAR_Seq_1_tempTD, ((uint8)ADC_SAR_Seq_1_TempBuf__TD_TERMOUT_EN | (uint8)TD_INC_DST_ADR)
+ 146:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** 
+ 147:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c ****     /* From the SAR to the TempArray */
+ 148:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c ****     (void) CyDmaTdSetAddress(ADC_SAR_Seq_1_tempTD, (uint16)(LO16((uint32)ADC_SAR_Seq_1_SAR_DATA_ADD
+ 171              		.loc 1 148 0
+ 172 002e 214E     		ldr	r6, .L13
+ 173 0030 341D     		adds	r4, r6, #4
+ 174 0032 A4B2     		uxth	r4, r4
+ 175 0034 2878     		ldrb	r0, [r5]	@ zero_extendqisi2
+ 176 0036 45F6A031 		movw	r1, #23456
+ 177 003a 2246     		mov	r2, r4
+ 178 003c FFF7FEFF 		bl	CyDmaTdSetAddress
+ 179              	.LVL12:
+ 149:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c ****         (uint16)(LO16((uint32)ADC_SAR_Seq_1_tempArray)));
+ 150:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** 
+ 151:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c ****     /* Associate the TD with the channel */
+ 152:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c ****     (void) CyDmaChSetInitialTd(ADC_SAR_Seq_1_tempChan, ADC_SAR_Seq_1_tempTD);
+ 180              		.loc 1 152 0
+ 181 0040 3078     		ldrb	r0, [r6]	@ zero_extendqisi2
+ 182 0042 2978     		ldrb	r1, [r5]	@ zero_extendqisi2
+ 183 0044 FFF7FEFF 		bl	CyDmaChSetInitialTd
+ 184              	.LVL13:
+ 153:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** 
+ 154:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** 
+ 155:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c ****     /* Provides initialization procedure for the FinalBuf DMA
+ 156:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c ****     * Configure this Td as follows:
+ 157:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c ****     *  - The TD is looping on itself
+ 158:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c ****     *  - Increment the source and destination address
+ARM GAS  C:\Users\chris\AppData\Local\Temp\ccQmEsxZ.s 			page 7
+
+
+ 159:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c ****     */
+ 160:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** 
+ 161:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c ****     if (ADC_SAR_Seq_1_finalTD == DMA_INVALID_TD)
+ 185              		.loc 1 161 0
+ 186 0048 6B78     		ldrb	r3, [r5, #1]	@ zero_extendqisi2
+ 187 004a FF2B     		cmp	r3, #255
+ 188 004c 02D1     		bne	.L11
+ 162:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c ****     {
+ 163:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c ****         ADC_SAR_Seq_1_finalTD = CyDmaTdAllocate();
+ 189              		.loc 1 163 0
+ 190 004e FFF7FEFF 		bl	CyDmaTdAllocate
+ 191              	.LVL14:
+ 192 0052 6870     		strb	r0, [r5, #1]
+ 193              	.L11:
+ 164:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c ****     }
+ 165:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c ****     
+ 166:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c ****     (void) CyDmaTdSetConfiguration(ADC_SAR_Seq_1_finalTD, (ADC_SAR_Seq_1_FINAL_BYTES_PER_BURST),
+ 194              		.loc 1 166 0
+ 195 0054 184D     		ldr	r5, .L13+4
+ 196 0056 6A78     		ldrb	r2, [r5, #1]	@ zero_extendqisi2
+ 197 0058 1046     		mov	r0, r2
+ 198 005a 0221     		movs	r1, #2
+ 199 005c 0723     		movs	r3, #7
+ 200 005e FFF7FEFF 		bl	CyDmaTdSetConfiguration
+ 201              	.LVL15:
+ 167:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c ****         ADC_SAR_Seq_1_finalTD, ((uint8)(ADC_SAR_Seq_1_FinalBuf__TD_TERMOUT_EN) | (uint8)TD_INC_SRC_
+ 168:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c ****             (uint8)TD_INC_DST_ADR));
+ 169:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** 
+ 170:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c ****     /* From the the TempArray to Final Array */
+ 171:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c ****     (void) CyDmaTdSetAddress(ADC_SAR_Seq_1_finalTD, (uint16)(LO16((uint32)ADC_SAR_Seq_1_tempArray))
+ 202              		.loc 1 171 0
+ 203 0062 6878     		ldrb	r0, [r5, #1]	@ zero_extendqisi2
+ 204 0064 2146     		mov	r1, r4
+ 205 0066 154A     		ldr	r2, .L13+8
+ 206 0068 92B2     		uxth	r2, r2
+ 207 006a FFF7FEFF 		bl	CyDmaTdSetAddress
+ 208              	.LVL16:
+ 172:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c ****         (uint16)(LO16((uint32)ADC_SAR_Seq_1_finalArray)));
+ 173:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** 
+ 174:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c ****     /* Associate the TD with the channel */
+ 175:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c ****     (void) CyDmaChSetInitialTd(ADC_SAR_Seq_1_finalChan, ADC_SAR_Seq_1_finalTD);
+ 209              		.loc 1 175 0
+ 210 006e 114C     		ldr	r4, .L13
+ 211 0070 6078     		ldrb	r0, [r4, #1]	@ zero_extendqisi2
+ 212 0072 6978     		ldrb	r1, [r5, #1]	@ zero_extendqisi2
+ 213 0074 FFF7FEFF 		bl	CyDmaChSetInitialTd
+ 214              	.LVL17:
+ 176:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c ****     
+ 177:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c ****     (void) CyDmaChEnable(ADC_SAR_Seq_1_tempChan, 1u);
+ 215              		.loc 1 177 0
+ 216 0078 2078     		ldrb	r0, [r4]	@ zero_extendqisi2
+ 217 007a 0121     		movs	r1, #1
+ 218 007c FFF7FEFF 		bl	CyDmaChEnable
+ 219              	.LVL18:
+ 178:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c ****     (void) CyDmaChEnable(ADC_SAR_Seq_1_finalChan, 1u);
+ 220              		.loc 1 178 0
+ 221 0080 6078     		ldrb	r0, [r4, #1]	@ zero_extendqisi2
+ARM GAS  C:\Users\chris\AppData\Local\Temp\ccQmEsxZ.s 			page 8
+
+
+ 222 0082 0121     		movs	r1, #1
+ 223 0084 FFF7FEFF 		bl	CyDmaChEnable
+ 224              	.LVL19:
+ 179:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** 
+ 180:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c ****     /* Enable Counter and give Enable pulse to set an address of the last channel */
+ 181:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c ****     enableInterrupts = CyEnterCriticalSection();
+ 225              		.loc 1 181 0
+ 226 0088 FFF7FEFF 		bl	CyEnterCriticalSection
+ 227              	.LVL20:
+ 182:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c ****     ADC_SAR_Seq_1_CYCLE_COUNTER_AUX_CONTROL_REG |= ((uint8)(ADC_SAR_Seq_1_CYCLE_COUNTER_ENABLE));
+ 228              		.loc 1 182 0
+ 229 008c 0C4A     		ldr	r2, .L13+12
+ 230 008e 1378     		ldrb	r3, [r2]	@ zero_extendqisi2
+ 231 0090 43F02003 		orr	r3, r3, #32
+ 232 0094 1370     		strb	r3, [r2]
+ 183:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c ****     CyExitCriticalSection(enableInterrupts);
+ 233              		.loc 1 183 0
+ 234 0096 FFF7FEFF 		bl	CyExitCriticalSection
+ 235              	.LVL21:
+ 184:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** 
+ 185:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c ****     /* Enable FSM of the Base Component */
+ 186:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c ****     ADC_SAR_Seq_1_CONTROL_REG |= ((uint8)(ADC_SAR_Seq_1_BASE_COMPONENT_ENABLE));
+ 236              		.loc 1 186 0
+ 237 009a 0A4B     		ldr	r3, .L13+16
+ 238 009c 1A78     		ldrb	r2, [r3]	@ zero_extendqisi2
+ 239 009e 42F00102 		orr	r2, r2, #1
+ 240 00a2 1A70     		strb	r2, [r3]
+ 187:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c ****     ADC_SAR_Seq_1_CONTROL_REG |= ((uint8)(ADC_SAR_Seq_1_LOAD_COUNTER_PERIOD));
+ 241              		.loc 1 187 0
+ 242 00a4 1A78     		ldrb	r2, [r3]	@ zero_extendqisi2
+ 243 00a6 42F00202 		orr	r2, r2, #2
+ 244 00aa 1A70     		strb	r2, [r3]
+ 188:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** 
+ 189:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c ****     #if(ADC_SAR_Seq_1_IRQ_REMOVE == 0u)
+ 190:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c ****         /* Clear a pending interrupt */
+ 191:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c ****         CyIntClearPending(ADC_SAR_Seq_1_INTC_NUMBER);
+ 245              		.loc 1 191 0
+ 246 00ac 0422     		movs	r2, #4
+ 247 00ae 064B     		ldr	r3, .L13+20
+ 248 00b0 1A60     		str	r2, [r3]
+ 249 00b2 70BD     		pop	{r4, r5, r6, pc}
+ 250              	.L14:
+ 251              		.align	2
+ 252              	.L13:
+ 253 00b4 00000000 		.word	.LANCHOR0
+ 254 00b8 00000000 		.word	.LANCHOR1
+ 255 00bc 00000000 		.word	ADC_SAR_Seq_1_finalArray
+ 256 00c0 93640040 		.word	1073767571
+ 257 00c4 72640040 		.word	1073767538
+ 258 00c8 80E200E0 		.word	-536812928
+ 259              		.cfi_endproc
+ 260              	.LFE2:
+ 261              		.size	ADC_SAR_Seq_1_Enable, .-ADC_SAR_Seq_1_Enable
+ 262              		.section	.text.ADC_SAR_Seq_1_Start,"ax",%progbits
+ 263              		.align	2
+ 264              		.global	ADC_SAR_Seq_1_Start
+ 265              		.thumb
+ARM GAS  C:\Users\chris\AppData\Local\Temp\ccQmEsxZ.s 			page 9
+
+
+ 266              		.thumb_func
+ 267              		.type	ADC_SAR_Seq_1_Start, %function
+ 268              	ADC_SAR_Seq_1_Start:
+ 269              	.LFB3:
+ 192:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c ****     #endif   /* End ADC_SAR_Seq_1_IRQ_REMOVE */
+ 193:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** }
+ 194:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** 
+ 195:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** 
+ 196:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** /*******************************************************************************
+ 197:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** * Function Name: ADC_SAR_Seq_1_Start
+ 198:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** ********************************************************************************
+ 199:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *
+ 200:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** * Summary:
+ 201:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *  Starts component
+ 202:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *
+ 203:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** * Parameters:
+ 204:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *  None.
+ 205:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *
+ 206:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** * Return:
+ 207:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *  None.
+ 208:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *
+ 209:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** * Side Effects:
+ 210:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *  If the initVar variable is already set, this function only calls the 
+ 211:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *  ADC_SAR_Seq_1_Enable() function
+ 212:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *
+ 213:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** * Reentrant:
+ 214:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *  No.
+ 215:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *
+ 216:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *******************************************************************************/
+ 217:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** void ADC_SAR_Seq_1_Start(void)
+ 218:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** {
+ 270              		.loc 1 218 0
+ 271              		.cfi_startproc
+ 272              		@ args = 0, pretend = 0, frame = 0
+ 273              		@ frame_needed = 0, uses_anonymous_args = 0
+ 274 0000 08B5     		push	{r3, lr}
+ 275              		.cfi_def_cfa_offset 8
+ 276              		.cfi_offset 3, -8
+ 277              		.cfi_offset 14, -4
+ 219:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c ****     if(ADC_SAR_Seq_1_initVar == 0u)
+ 278              		.loc 1 219 0
+ 279 0002 074B     		ldr	r3, .L18
+ 280 0004 9B68     		ldr	r3, [r3, #8]
+ 281 0006 23B9     		cbnz	r3, .L16
+ 220:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c ****     {
+ 221:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c ****         ADC_SAR_Seq_1_Init();
+ 282              		.loc 1 221 0
+ 283 0008 FFF7FEFF 		bl	ADC_SAR_Seq_1_Init
+ 284              	.LVL22:
+ 222:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c ****         ADC_SAR_Seq_1_initVar = 1u;
+ 285              		.loc 1 222 0
+ 286 000c 0122     		movs	r2, #1
+ 287 000e 044B     		ldr	r3, .L18
+ 288 0010 9A60     		str	r2, [r3, #8]
+ 289              	.L16:
+ 223:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c ****     }
+ 224:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** 
+ARM GAS  C:\Users\chris\AppData\Local\Temp\ccQmEsxZ.s 			page 10
+
+
+ 225:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c ****     ADC_SAR_Seq_1_Enable();
+ 290              		.loc 1 225 0
+ 291 0012 FFF7FEFF 		bl	ADC_SAR_Seq_1_Enable
+ 292              	.LVL23:
+ 226:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c ****     ADC_SAR_Seq_1_SAR_Start();
+ 293              		.loc 1 226 0
+ 294 0016 FFF7FEFF 		bl	ADC_SAR_Seq_1_SAR_Start
+ 295              	.LVL24:
+ 227:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c ****     (void) CY_GET_REG8(ADC_SAR_Seq_1_STATUS_PTR);
+ 296              		.loc 1 227 0
+ 297 001a 024B     		ldr	r3, .L18+4
+ 298 001c 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 299 001e 08BD     		pop	{r3, pc}
+ 300              	.L19:
+ 301              		.align	2
+ 302              	.L18:
+ 303 0020 00000000 		.word	.LANCHOR0
+ 304 0024 64640040 		.word	1073767524
+ 305              		.cfi_endproc
+ 306              	.LFE3:
+ 307              		.size	ADC_SAR_Seq_1_Start, .-ADC_SAR_Seq_1_Start
+ 308              		.section	.text.ADC_SAR_Seq_1_Stop,"ax",%progbits
+ 309              		.align	2
+ 310              		.global	ADC_SAR_Seq_1_Stop
+ 311              		.thumb
+ 312              		.thumb_func
+ 313              		.type	ADC_SAR_Seq_1_Stop, %function
+ 314              	ADC_SAR_Seq_1_Stop:
+ 315              	.LFB4:
+ 228:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** 
+ 229:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** }
+ 230:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** 
+ 231:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** 
+ 232:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** /*******************************************************************************
+ 233:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** * Function Name: ADC_SAR_Seq_1_Stop
+ 234:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** ********************************************************************************
+ 235:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *
+ 236:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** * Summary:
+ 237:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *  Stops component.
+ 238:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *
+ 239:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** * Parameters:
+ 240:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *  None.
+ 241:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *
+ 242:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** * Return:
+ 243:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *  None.
+ 244:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *
+ 245:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** * Side Effects:
+ 246:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *  None.
+ 247:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *
+ 248:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** * Reentrant:
+ 249:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *  No.
+ 250:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *
+ 251:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *******************************************************************************/
+ 252:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** void ADC_SAR_Seq_1_Stop(void)
+ 253:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** {
+ 316              		.loc 1 253 0
+ 317              		.cfi_startproc
+ARM GAS  C:\Users\chris\AppData\Local\Temp\ccQmEsxZ.s 			page 11
+
+
+ 318              		@ args = 0, pretend = 0, frame = 0
+ 319              		@ frame_needed = 0, uses_anonymous_args = 0
+ 320 0000 08B5     		push	{r3, lr}
+ 321              		.cfi_def_cfa_offset 8
+ 322              		.cfi_offset 3, -8
+ 323              		.cfi_offset 14, -4
+ 254:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c ****     ADC_SAR_Seq_1_SAR_Stop();
+ 324              		.loc 1 254 0
+ 325 0002 FFF7FEFF 		bl	ADC_SAR_Seq_1_SAR_Stop
+ 326              	.LVL25:
+ 255:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c ****     ADC_SAR_Seq_1_Disable();
+ 327              		.loc 1 255 0
+ 328 0006 FFF7FEFF 		bl	ADC_SAR_Seq_1_Disable
+ 329              	.LVL26:
+ 330 000a 08BD     		pop	{r3, pc}
+ 331              		.cfi_endproc
+ 332              	.LFE4:
+ 333              		.size	ADC_SAR_Seq_1_Stop, .-ADC_SAR_Seq_1_Stop
+ 334              		.section	.text.ADC_SAR_Seq_1_StartConvert,"ax",%progbits
+ 335              		.align	2
+ 336              		.global	ADC_SAR_Seq_1_StartConvert
+ 337              		.thumb
+ 338              		.thumb_func
+ 339              		.type	ADC_SAR_Seq_1_StartConvert, %function
+ 340              	ADC_SAR_Seq_1_StartConvert:
+ 341              	.LFB5:
+ 256:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** }
+ 257:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** 
+ 258:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** #if(ADC_SAR_Seq_1_SAMPLE_MODE != ADC_SAR_Seq_1_SAMPLE_MODE_HW_TRIGGERED)
+ 259:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** 
+ 260:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c ****     /*******************************************************************************
+ 261:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c ****     * Function Name: ADC_SAR_Seq_1_StartConvert
+ 262:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c ****     ********************************************************************************
+ 263:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c ****     *
+ 264:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c ****     * Summary:
+ 265:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c ****     *  When the Sample Mode parameter is set to 'Free Running', the component will
+ 266:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c ****     * operate in a continuous mode. The channels will be scanned continuously until
+ 267:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c ****     * _StopConvert()or  _Stop() is called
+ 268:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c ****     *
+ 269:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c ****     * Parameters:
+ 270:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c ****     *  None.
+ 271:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c ****     *
+ 272:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c ****     * Return:
+ 273:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c ****     *  None.
+ 274:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c ****     *
+ 275:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c ****     * Side Effects:
+ 276:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c ****     *  Calling ADC_SAR_Seq_1_StartConvert() disables the external SOC pin.
+ 277:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c ****     *
+ 278:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c ****     * Reentrant:
+ 279:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c ****     *  No.
+ 280:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c ****     *
+ 281:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c ****     *******************************************************************************/
+ 282:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c ****     void ADC_SAR_Seq_1_StartConvert(void)
+ 283:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c ****     {
+ 342              		.loc 1 283 0
+ 343              		.cfi_startproc
+ 344              		@ args = 0, pretend = 0, frame = 0
+ARM GAS  C:\Users\chris\AppData\Local\Temp\ccQmEsxZ.s 			page 12
+
+
+ 345              		@ frame_needed = 0, uses_anonymous_args = 0
+ 346 0000 08B5     		push	{r3, lr}
+ 347              		.cfi_def_cfa_offset 8
+ 348              		.cfi_offset 3, -8
+ 349              		.cfi_offset 14, -4
+ 284:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c ****         #if(ADC_SAR_Seq_1_SAMPLE_MODE != ADC_SAR_Seq_1_SAMPLE_MODE_FREE_RUNNING)
+ 285:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** 
+ 286:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c ****             ADC_SAR_Seq_1_CONTROL_REG |= ((uint8)(ADC_SAR_Seq_1_SOFTWARE_SOC_PULSE));
+ 287:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** 
+ 288:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c ****         #else
+ 289:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** 
+ 290:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c ****             ADC_SAR_Seq_1_SAR_StartConvert();
+ 350              		.loc 1 290 0
+ 351 0002 FFF7FEFF 		bl	ADC_SAR_Seq_1_SAR_StartConvert
+ 352              	.LVL27:
+ 353 0006 08BD     		pop	{r3, pc}
+ 354              		.cfi_endproc
+ 355              	.LFE5:
+ 356              		.size	ADC_SAR_Seq_1_StartConvert, .-ADC_SAR_Seq_1_StartConvert
+ 357              		.section	.text.ADC_SAR_Seq_1_StopConvert,"ax",%progbits
+ 358              		.align	2
+ 359              		.global	ADC_SAR_Seq_1_StopConvert
+ 360              		.thumb
+ 361              		.thumb_func
+ 362              		.type	ADC_SAR_Seq_1_StopConvert, %function
+ 363              	ADC_SAR_Seq_1_StopConvert:
+ 364              	.LFB6:
+ 291:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** 
+ 292:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c ****         #endif /*
+ 293:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c ****                  #if(ADC_SAR_Seq_1_SAMPLE_MODE !=
+ 294:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c ****                  ADC_SAR_Seq_1_SAMPLE_MODE_FREE_RUNNING)
+ 295:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c ****                */
+ 296:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c ****     }
+ 297:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** 
+ 298:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** 
+ 299:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c ****     /*******************************************************************************
+ 300:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c ****     * Function Name: ADC_SAR_Seq_1_StopConvert
+ 301:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c ****     ********************************************************************************
+ 302:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c ****     *
+ 303:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c ****     * Summary:
+ 304:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c ****     *  Forces the component to stop all conversions
+ 305:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c ****     *
+ 306:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c ****     * Parameters:
+ 307:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c ****     *  None.
+ 308:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c ****     *
+ 309:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c ****     * Return:
+ 310:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c ****     *  None.
+ 311:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c ****     *
+ 312:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c ****     * Side Effects:
+ 313:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c ****     *  In free-running and software trigger mode, this function sets a software 
+ 314:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c ****     *  version of the SOC to low level and switches the SOC source to hardware SOC 
+ 315:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c ****     *  input (Hardware trigger).
+ 316:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c ****     *
+ 317:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c ****     * Reentrant:
+ 318:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c ****     *  No.
+ 319:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c ****     *
+ 320:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c ****     *******************************************************************************/
+ARM GAS  C:\Users\chris\AppData\Local\Temp\ccQmEsxZ.s 			page 13
+
+
+ 321:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c ****     void ADC_SAR_Seq_1_StopConvert(void)
+ 322:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c ****     {
+ 365              		.loc 1 322 0
+ 366              		.cfi_startproc
+ 367              		@ args = 0, pretend = 0, frame = 0
+ 368              		@ frame_needed = 0, uses_anonymous_args = 0
+ 369 0000 08B5     		push	{r3, lr}
+ 370              		.cfi_def_cfa_offset 8
+ 371              		.cfi_offset 3, -8
+ 372              		.cfi_offset 14, -4
+ 323:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c ****         ADC_SAR_Seq_1_SAR_StopConvert();
+ 373              		.loc 1 323 0
+ 374 0002 FFF7FEFF 		bl	ADC_SAR_Seq_1_SAR_StopConvert
+ 375              	.LVL28:
+ 376 0006 08BD     		pop	{r3, pc}
+ 377              		.cfi_endproc
+ 378              	.LFE6:
+ 379              		.size	ADC_SAR_Seq_1_StopConvert, .-ADC_SAR_Seq_1_StopConvert
+ 380              		.section	.text.ADC_SAR_Seq_1_IsEndConversion,"ax",%progbits
+ 381              		.align	2
+ 382              		.global	ADC_SAR_Seq_1_IsEndConversion
+ 383              		.thumb
+ 384              		.thumb_func
+ 385              		.type	ADC_SAR_Seq_1_IsEndConversion, %function
+ 386              	ADC_SAR_Seq_1_IsEndConversion:
+ 387              	.LFB7:
+ 324:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c ****     }
+ 325:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** 
+ 326:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** #endif /* ADC_SAR_Seq_1_SAMPLE_MODE != ADC_SAR_Seq_1_SAMPLE_MODE_HW_TRIGGERED */
+ 327:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** 
+ 328:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** 
+ 329:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** /*******************************************************************************
+ 330:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** * Function Name: ADC_SAR_Seq_1_IsEndConversion
+ 331:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** ********************************************************************************
+ 332:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *
+ 333:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** * Summary:
+ 334:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *  Checks for ADC end of conversion for the case one channel and end of scan
+ 335:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *  for the case of multiple channels
+ 336:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *
+ 337:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** * Parameters:
+ 338:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *  retMode: Check conversion return mode
+ 339:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *   Values:
+ 340:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *         - ADC_SAR_Seq_1_RETURN_STATUS      - Immediately returns the 
+ 341:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *                                                 status
+ 342:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *         - ADC_SAR_Seq_1_WAIT_FOR_RESULT    - Does not return a result 
+ 343:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *                                                 until the conversion 
+ 344:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *                                                 is complete
+ 345:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *
+ 346:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** * Return:
+ 347:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *  If a nonzero value is returned, the last conversion is complete. If the 
+ 348:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *  returned value is zero, the ADC_SAR_Seq is still calculating the last result
+ 349:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *
+ 350:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** * Side Effects:
+ 351:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *  This function reads the end of conversion status, which is cleared on read
+ 352:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *
+ 353:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** * Reentrant:
+ 354:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *  No.
+ARM GAS  C:\Users\chris\AppData\Local\Temp\ccQmEsxZ.s 			page 14
+
+
+ 355:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *
+ 356:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *******************************************************************************/
+ 357:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** uint32 ADC_SAR_Seq_1_IsEndConversion(uint8 retMode)
+ 358:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** {
+ 388              		.loc 1 358 0
+ 389              		.cfi_startproc
+ 390              		@ args = 0, pretend = 0, frame = 0
+ 391              		@ frame_needed = 0, uses_anonymous_args = 0
+ 392              		@ link register save eliminated.
+ 393              	.LVL29:
+ 394              	.L28:
+ 359:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c ****     uint8 status;
+ 360:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** 
+ 361:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c ****     do
+ 362:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c ****     {
+ 363:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c ****       status = ADC_SAR_Seq_1_STATUS_REG;
+ 395              		.loc 1 363 0 discriminator 2
+ 396 0000 044B     		ldr	r3, .L29
+ 397 0002 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 398              	.LVL30:
+ 364:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c ****     } while ((status == 0u) && (retMode == ADC_SAR_Seq_1_WAIT_FOR_RESULT));
+ 399              		.loc 1 364 0 discriminator 2
+ 400 0004 03F0FF02 		and	r2, r3, #255
+ 401 0008 0BB9     		cbnz	r3, .L27
+ 402              		.loc 1 364 0 is_stmt 0 discriminator 1
+ 403 000a 0028     		cmp	r0, #0
+ 404 000c F8D0     		beq	.L28
+ 405              	.L27:
+ 365:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** 
+ 366:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c ****     return((uint32)status);
+ 367:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** }
+ 406              		.loc 1 367 0 is_stmt 1
+ 407 000e 1046     		mov	r0, r2
+ 408              	.LVL31:
+ 409 0010 7047     		bx	lr
+ 410              	.L30:
+ 411 0012 00BF     		.align	2
+ 412              	.L29:
+ 413 0014 64640040 		.word	1073767524
+ 414              		.cfi_endproc
+ 415              	.LFE7:
+ 416              		.size	ADC_SAR_Seq_1_IsEndConversion, .-ADC_SAR_Seq_1_IsEndConversion
+ 417              		.section	.text.ADC_SAR_Seq_1_GetResult16,"ax",%progbits
+ 418              		.align	2
+ 419              		.global	ADC_SAR_Seq_1_GetResult16
+ 420              		.thumb
+ 421              		.thumb_func
+ 422              		.type	ADC_SAR_Seq_1_GetResult16, %function
+ 423              	ADC_SAR_Seq_1_GetResult16:
+ 424              	.LFB8:
+ 368:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** 
+ 369:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** 
+ 370:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** /*******************************************************************************
+ 371:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** * Function Name: ADC_SAR_Seq_1_GetResult16
+ 372:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** ********************************************************************************
+ 373:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *
+ 374:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** * Summary:
+ARM GAS  C:\Users\chris\AppData\Local\Temp\ccQmEsxZ.s 			page 15
+
+
+ 375:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *  Returns the ADC result for channel chan
+ 376:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *
+ 377:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** * Parameters:
+ 378:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *  chan: The ADC channel in which to return the result. The first channel is 0 
+ 379:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *        and the last channel is the total number of channels - 1
+ 380:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *
+ 381:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** * Return:
+ 382:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *  Returns converted data as a signed 16-bit integer
+ 383:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *
+ 384:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** * Side Effects:
+ 385:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *  Converts the ADC counts to the 2's complement form
+ 386:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *
+ 387:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** * Reentrant:
+ 388:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *  No.
+ 389:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *
+ 390:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *******************************************************************************/
+ 391:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** int16 ADC_SAR_Seq_1_GetResult16(uint16 chan)
+ 392:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** {
+ 425              		.loc 1 392 0
+ 426              		.cfi_startproc
+ 427              		@ args = 0, pretend = 0, frame = 0
+ 428              		@ frame_needed = 0, uses_anonymous_args = 0
+ 429              		@ link register save eliminated.
+ 430              	.LVL32:
+ 393:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c ****     return (ADC_SAR_Seq_1_finalArray[ADC_SAR_Seq_1_GET_RESULT_INDEX_OFFSET - chan] - ADC_SAR_Seq_1_
+ 431              		.loc 1 393 0
+ 432 0000 4042     		negs	r0, r0
+ 433              	.LVL33:
+ 434 0002 044B     		ldr	r3, .L32
+ 435 0004 33F81030 		ldrh	r3, [r3, r0, lsl #1]
+ 436 0008 034A     		ldr	r2, .L32+4
+ 437 000a 1088     		ldrh	r0, [r2]
+ 438 000c 181A     		subs	r0, r3, r0
+ 394:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** }
+ 439              		.loc 1 394 0
+ 440 000e 00B2     		sxth	r0, r0
+ 441 0010 7047     		bx	lr
+ 442              	.L33:
+ 443 0012 00BF     		.align	2
+ 444              	.L32:
+ 445 0014 00000000 		.word	ADC_SAR_Seq_1_finalArray
+ 446 0018 00000000 		.word	ADC_SAR_Seq_1_SAR_shift
+ 447              		.cfi_endproc
+ 448              	.LFE8:
+ 449              		.size	ADC_SAR_Seq_1_GetResult16, .-ADC_SAR_Seq_1_GetResult16
+ 450              		.section	.text.ADC_SAR_Seq_1_GetAdcResult,"ax",%progbits
+ 451              		.align	2
+ 452              		.global	ADC_SAR_Seq_1_GetAdcResult
+ 453              		.thumb
+ 454              		.thumb_func
+ 455              		.type	ADC_SAR_Seq_1_GetAdcResult, %function
+ 456              	ADC_SAR_Seq_1_GetAdcResult:
+ 457              	.LFB9:
+ 395:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** 
+ 396:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** 
+ 397:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** /*******************************************************************************
+ 398:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** * Function Name: ADC_SAR_Seq_1_GetAdcResult
+ARM GAS  C:\Users\chris\AppData\Local\Temp\ccQmEsxZ.s 			page 16
+
+
+ 399:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** ********************************************************************************
+ 400:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *
+ 401:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** * Summary:
+ 402:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *  Gets the data available in the SAR DATA register, not the results buffer
+ 403:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *
+ 404:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** * Parameters:
+ 405:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *  None.
+ 406:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *
+ 407:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** * Return:
+ 408:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *  The last ADC conversion result
+ 409:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *
+ 410:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** * Side Effects:
+ 411:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *  Converts the ADC counts to the 2's complement form
+ 412:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *
+ 413:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** * Reentrant:
+ 414:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *  No.
+ 415:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *
+ 416:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *******************************************************************************/
+ 417:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** int16 ADC_SAR_Seq_1_GetAdcResult(void)
+ 418:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** {
+ 458              		.loc 1 418 0
+ 459              		.cfi_startproc
+ 460              		@ args = 0, pretend = 0, frame = 0
+ 461              		@ frame_needed = 0, uses_anonymous_args = 0
+ 462 0000 08B5     		push	{r3, lr}
+ 463              		.cfi_def_cfa_offset 8
+ 464              		.cfi_offset 3, -8
+ 465              		.cfi_offset 14, -4
+ 419:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c ****     return (ADC_SAR_Seq_1_SAR_GetResult16());
+ 466              		.loc 1 419 0
+ 467 0002 FFF7FEFF 		bl	ADC_SAR_Seq_1_SAR_GetResult16
+ 468              	.LVL34:
+ 420:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** }
+ 469              		.loc 1 420 0
+ 470 0006 08BD     		pop	{r3, pc}
+ 471              		.cfi_endproc
+ 472              	.LFE9:
+ 473              		.size	ADC_SAR_Seq_1_GetAdcResult, .-ADC_SAR_Seq_1_GetAdcResult
+ 474              		.section	.text.ADC_SAR_Seq_1_SetOffset,"ax",%progbits
+ 475              		.align	2
+ 476              		.global	ADC_SAR_Seq_1_SetOffset
+ 477              		.thumb
+ 478              		.thumb_func
+ 479              		.type	ADC_SAR_Seq_1_SetOffset, %function
+ 480              	ADC_SAR_Seq_1_SetOffset:
+ 481              	.LFB10:
+ 421:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** 
+ 422:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** 
+ 423:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** /*******************************************************************************
+ 424:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** * Function Name: ADC_SAR_Seq_1_SetOffset
+ 425:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** ********************************************************************************
+ 426:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *
+ 427:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** * Summary:
+ 428:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *  Sets the ADC offset which is used by the functions _CountsTo_uVolts(),
+ 429:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *  _CountsTo_mVolts() and _CountsTo_Volts() to substract the offset from the
+ 430:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *  given reading before calculating the voltage conversion
+ 431:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *
+ARM GAS  C:\Users\chris\AppData\Local\Temp\ccQmEsxZ.s 			page 17
+
+
+ 432:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** * Parameters:
+ 433:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *  offset: This value is measured when the inputs are shorted or connected to
+ 434:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *  the same input voltage
+ 435:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *
+ 436:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** * Return:
+ 437:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *  None.
+ 438:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *
+ 439:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** * Side Effects:
+ 440:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *  Affects ADC_SAR_Seq_1_CountsTo_Volts(), 
+ 441:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *  ADC_SAR_Seq_1_CountsTo_mVolts(), and ADC_SAR_Seq_1_CountsTo_uVolts() 
+ 442:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *  by subtracting the given offset.
+ 443:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *
+ 444:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** * Reentrant:
+ 445:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *  No.
+ 446:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *
+ 447:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *******************************************************************************/
+ 448:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** void ADC_SAR_Seq_1_SetOffset(int32 offset)
+ 449:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** {
+ 482              		.loc 1 449 0
+ 483              		.cfi_startproc
+ 484              		@ args = 0, pretend = 0, frame = 0
+ 485              		@ frame_needed = 0, uses_anonymous_args = 0
+ 486              	.LVL35:
+ 487 0000 08B5     		push	{r3, lr}
+ 488              		.cfi_def_cfa_offset 8
+ 489              		.cfi_offset 3, -8
+ 490              		.cfi_offset 14, -4
+ 450:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c ****     ADC_SAR_Seq_1_SAR_SetOffset((int16)offset);
+ 491              		.loc 1 450 0
+ 492 0002 00B2     		sxth	r0, r0
+ 493              	.LVL36:
+ 494 0004 FFF7FEFF 		bl	ADC_SAR_Seq_1_SAR_SetOffset
+ 495              	.LVL37:
+ 496 0008 08BD     		pop	{r3, pc}
+ 497              		.cfi_endproc
+ 498              	.LFE10:
+ 499              		.size	ADC_SAR_Seq_1_SetOffset, .-ADC_SAR_Seq_1_SetOffset
+ 500              		.section	.text.ADC_SAR_Seq_1_SetResolution,"ax",%progbits
+ 501              		.align	2
+ 502              		.global	ADC_SAR_Seq_1_SetResolution
+ 503              		.thumb
+ 504              		.thumb_func
+ 505              		.type	ADC_SAR_Seq_1_SetResolution, %function
+ 506              	ADC_SAR_Seq_1_SetResolution:
+ 507              	.LFB11:
+ 451:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** }
+ 452:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** 
+ 453:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** 
+ 454:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** /*******************************************************************************
+ 455:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** * Function Name: ADC_SAR_Seq_1_SetResolution
+ 456:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** ********************************************************************************
+ 457:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *
+ 458:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** * Summary:
+ 459:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *  Sets the Relution of the SAR.
+ 460:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *  This function does not affect the actual conversion with PSoC5 ES1 silicon.
+ 461:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *
+ 462:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** * Parameters:
+ARM GAS  C:\Users\chris\AppData\Local\Temp\ccQmEsxZ.s 			page 18
+
+
+ 463:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *  resolution:
+ 464:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *  12 ->    RES12
+ 465:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *  10 ->    RES10
+ 466:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *  8  ->    RES8
+ 467:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *
+ 468:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** * Return:
+ 469:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *  None.
+ 470:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *
+ 471:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** * Side Effects:
+ 472:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *  The ADC_SAR_Seq resolution cannot be changed during a conversion cycle. The
+ 473:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *  recommended best practice is to stop conversions with
+ 474:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *  ADC_SAR_Seq_1_StopConvert(), change the resolution, then restart the
+ 475:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *  conversions with ADC_SAR_Seq_1_StartConvert().
+ 476:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *  If you decide not to stop conversions before calling this API, you
+ 477:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *  should use ADC_SAR_Seq_1_IsEndConversion() to wait until conversion is 
+ 478:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *  complete  before changing the resolution.
+ 479:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *  If you call ADC_SetResolution() during a conversion, the resolution will
+ 480:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *  not be changed until the current conversion is complete. Data will not be
+ 481:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *  available in the new resolution for another 6 + "New Resolution(in bits)"
+ 482:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *  clock cycles.
+ 483:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *  You may need add a delay of this number of clock cycles after
+ 484:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *  ADC_SAR_Seq_1_SetResolution() is called before data is valid again.
+ 485:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *  Affects ADC_SAR_Seq_1_CountsTo_Volts(), ADC_SAR_Seq_1_CountsTo_mVolts(), 
+ 486:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *  and ADC_SAR_Seq_1_CountsTo_uVolts() by calculating the correct conversion 
+ 487:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *  between ADC counts and the applied input voltage. Calculation depends on 
+ 488:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *  resolution, input range, and voltage reference.
+ 489:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *
+ 490:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *******************************************************************************/
+ 491:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** void ADC_SAR_Seq_1_SetResolution(uint8 resolution)
+ 492:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** {
+ 508              		.loc 1 492 0
+ 509              		.cfi_startproc
+ 510              		@ args = 0, pretend = 0, frame = 0
+ 511              		@ frame_needed = 0, uses_anonymous_args = 0
+ 512              	.LVL38:
+ 513 0000 08B5     		push	{r3, lr}
+ 514              		.cfi_def_cfa_offset 8
+ 515              		.cfi_offset 3, -8
+ 516              		.cfi_offset 14, -4
+ 493:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c ****     ADC_SAR_Seq_1_SAR_SetResolution(resolution);
+ 517              		.loc 1 493 0
+ 518 0002 FFF7FEFF 		bl	ADC_SAR_Seq_1_SAR_SetResolution
+ 519              	.LVL39:
+ 520 0006 08BD     		pop	{r3, pc}
+ 521              		.cfi_endproc
+ 522              	.LFE11:
+ 523              		.size	ADC_SAR_Seq_1_SetResolution, .-ADC_SAR_Seq_1_SetResolution
+ 524              		.section	.text.ADC_SAR_Seq_1_SetGain,"ax",%progbits
+ 525              		.align	2
+ 526              		.global	ADC_SAR_Seq_1_SetGain
+ 527              		.thumb
+ 528              		.thumb_func
+ 529              		.type	ADC_SAR_Seq_1_SetGain, %function
+ 530              	ADC_SAR_Seq_1_SetGain:
+ 531              	.LFB12:
+ 494:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** }
+ 495:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** 
+ARM GAS  C:\Users\chris\AppData\Local\Temp\ccQmEsxZ.s 			page 19
+
+
+ 496:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** 
+ 497:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** /*******************************************************************************
+ 498:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** * Function Name: ADC_SAR_Seq_1_SetGain
+ 499:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** ********************************************************************************
+ 500:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *
+ 501:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** * Summary:
+ 502:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *  Sets the ADC gain in counts per volt for the voltage conversion
+ 503:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *
+ 504:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** * Parameters:
+ 505:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *  adcGain: counts per volt
+ 506:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *
+ 507:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** * Return:
+ 508:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *  None.
+ 509:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *
+ 510:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** * Side Effects:
+ 511:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *  None.
+ 512:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *
+ 513:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** * Reentrant:
+ 514:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *  No.
+ 515:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *
+ 516:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *******************************************************************************/
+ 517:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** void ADC_SAR_Seq_1_SetGain(int32 adcGain)
+ 518:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** {
+ 532              		.loc 1 518 0
+ 533              		.cfi_startproc
+ 534              		@ args = 0, pretend = 0, frame = 0
+ 535              		@ frame_needed = 0, uses_anonymous_args = 0
+ 536              	.LVL40:
+ 537 0000 08B5     		push	{r3, lr}
+ 538              		.cfi_def_cfa_offset 8
+ 539              		.cfi_offset 3, -8
+ 540              		.cfi_offset 14, -4
+ 519:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c ****     ADC_SAR_Seq_1_SAR_SetGain((int16)adcGain);
+ 541              		.loc 1 519 0
+ 542 0002 00B2     		sxth	r0, r0
+ 543              	.LVL41:
+ 544 0004 FFF7FEFF 		bl	ADC_SAR_Seq_1_SAR_SetGain
+ 545              	.LVL42:
+ 546 0008 08BD     		pop	{r3, pc}
+ 547              		.cfi_endproc
+ 548              	.LFE12:
+ 549              		.size	ADC_SAR_Seq_1_SetGain, .-ADC_SAR_Seq_1_SetGain
+ 550              		.section	.text.ADC_SAR_Seq_1_SetScaledGain,"ax",%progbits
+ 551              		.align	2
+ 552              		.global	ADC_SAR_Seq_1_SetScaledGain
+ 553              		.thumb
+ 554              		.thumb_func
+ 555              		.type	ADC_SAR_Seq_1_SetScaledGain, %function
+ 556              	ADC_SAR_Seq_1_SetScaledGain:
+ 557              	.LFB13:
+ 520:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** }
+ 521:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** 
+ 522:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** 
+ 523:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** /*******************************************************************************
+ 524:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** * Function Name: ADC_SAR_Seq_1_SetScaledGain
+ 525:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** ********************************************************************************
+ 526:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *
+ARM GAS  C:\Users\chris\AppData\Local\Temp\ccQmEsxZ.s 			page 20
+
+
+ 527:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** * Summary:
+ 528:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *  Sets the ADC gain in counts per 10 volts for the voltage conversion functions
+ 529:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *  that follow. This value is set by default by the reference and input range
+ 530:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *  settings. It should only be used to further calibrate the ADC with a known
+ 531:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *  input or if the ADC is using an external reference.
+ 532:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *
+ 533:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** * Parameters:
+ 534:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *  int32  adcGain  counts per 10 volt
+ 535:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *
+ 536:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** * Return:
+ 537:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *  None.
+ 538:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *
+ 539:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** * Side Effects:
+ 540:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *  Affects ADC_SAR_Seq_1_CountsTo_Volts(), ADC_SAR_Seq_1_CountsTo_mVolts(),
+ 541:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *  ADC_SAR_Seq_1_CountsTo_uVolts() by supplying the correct conversion 
+ 542:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *  between ADC counts and the applied input voltage
+ 543:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *
+ 544:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** * Reentrant:
+ 545:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *  No.
+ 546:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *
+ 547:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *******************************************************************************/
+ 548:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** void ADC_SAR_Seq_1_SetScaledGain(int32 adcGain)
+ 549:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** {
+ 558              		.loc 1 549 0
+ 559              		.cfi_startproc
+ 560              		@ args = 0, pretend = 0, frame = 0
+ 561              		@ frame_needed = 0, uses_anonymous_args = 0
+ 562              	.LVL43:
+ 563 0000 08B5     		push	{r3, lr}
+ 564              		.cfi_def_cfa_offset 8
+ 565              		.cfi_offset 3, -8
+ 566              		.cfi_offset 14, -4
+ 550:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c ****     ADC_SAR_Seq_1_SAR_SetScaledGain(adcGain);
+ 567              		.loc 1 550 0
+ 568 0002 FFF7FEFF 		bl	ADC_SAR_Seq_1_SAR_SetScaledGain
+ 569              	.LVL44:
+ 570 0006 08BD     		pop	{r3, pc}
+ 571              		.cfi_endproc
+ 572              	.LFE13:
+ 573              		.size	ADC_SAR_Seq_1_SetScaledGain, .-ADC_SAR_Seq_1_SetScaledGain
+ 574              		.section	.text.ADC_SAR_Seq_1_CountsTo_mVolts,"ax",%progbits
+ 575              		.align	2
+ 576              		.global	ADC_SAR_Seq_1_CountsTo_mVolts
+ 577              		.thumb
+ 578              		.thumb_func
+ 579              		.type	ADC_SAR_Seq_1_CountsTo_mVolts, %function
+ 580              	ADC_SAR_Seq_1_CountsTo_mVolts:
+ 581              	.LFB14:
+ 551:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** }
+ 552:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** 
+ 553:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** 
+ 554:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** /*******************************************************************************
+ 555:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** * Function Name: ADC_SAR_Seq_1_CountsTo_mVolts
+ 556:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** ********************************************************************************
+ 557:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *
+ 558:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** * Summary:
+ 559:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *  Converts the ADC output to mVolts as a 32-bit integer
+ARM GAS  C:\Users\chris\AppData\Local\Temp\ccQmEsxZ.s 			page 21
+
+
+ 560:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *
+ 561:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** * Parameters:
+ 562:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *  adcCounts: Result from the ADC_SAR_Seq conversion
+ 563:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *
+ 564:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** * Return:
+ 565:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *  Result in mV
+ 566:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *
+ 567:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** * Side Effects:
+ 568:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *  None.
+ 569:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *
+ 570:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** * Reentrant:
+ 571:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *  No.
+ 572:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *
+ 573:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *******************************************************************************/
+ 574:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** int32 ADC_SAR_Seq_1_CountsTo_mVolts(int16 adcCounts)
+ 575:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** {
+ 582              		.loc 1 575 0
+ 583              		.cfi_startproc
+ 584              		@ args = 0, pretend = 0, frame = 0
+ 585              		@ frame_needed = 0, uses_anonymous_args = 0
+ 586              	.LVL45:
+ 587 0000 08B5     		push	{r3, lr}
+ 588              		.cfi_def_cfa_offset 8
+ 589              		.cfi_offset 3, -8
+ 590              		.cfi_offset 14, -4
+ 576:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c ****     return ((int32) ADC_SAR_Seq_1_SAR_CountsTo_mVolts(adcCounts));
+ 591              		.loc 1 576 0
+ 592 0002 FFF7FEFF 		bl	ADC_SAR_Seq_1_SAR_CountsTo_mVolts
+ 593              	.LVL46:
+ 577:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** }
+ 594              		.loc 1 577 0
+ 595 0006 08BD     		pop	{r3, pc}
+ 596              		.cfi_endproc
+ 597              	.LFE14:
+ 598              		.size	ADC_SAR_Seq_1_CountsTo_mVolts, .-ADC_SAR_Seq_1_CountsTo_mVolts
+ 599              		.section	.text.ADC_SAR_Seq_1_CountsTo_uVolts,"ax",%progbits
+ 600              		.align	2
+ 601              		.global	ADC_SAR_Seq_1_CountsTo_uVolts
+ 602              		.thumb
+ 603              		.thumb_func
+ 604              		.type	ADC_SAR_Seq_1_CountsTo_uVolts, %function
+ 605              	ADC_SAR_Seq_1_CountsTo_uVolts:
+ 606              	.LFB15:
+ 578:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** 
+ 579:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** 
+ 580:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** /*******************************************************************************
+ 581:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** * Function Name: ADC_SAR_Seq_1_CountsTo_uVolts
+ 582:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** ********************************************************************************
+ 583:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *
+ 584:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** * Summary:
+ 585:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *  Converts the ADC output to uVolts as a 32-bit integer
+ 586:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *
+ 587:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** * Parameters:
+ 588:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *  adcCounts: Result from the ADC conversion
+ 589:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *
+ 590:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** * Return:
+ 591:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *  Result in uV
+ARM GAS  C:\Users\chris\AppData\Local\Temp\ccQmEsxZ.s 			page 22
+
+
+ 592:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *
+ 593:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** * Side Effects:
+ 594:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *  None.
+ 595:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *
+ 596:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** * Reentrant:
+ 597:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *  No.
+ 598:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *
+ 599:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *******************************************************************************/
+ 600:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** int32 ADC_SAR_Seq_1_CountsTo_uVolts(int16 adcCounts)
+ 601:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** {
+ 607              		.loc 1 601 0
+ 608              		.cfi_startproc
+ 609              		@ args = 0, pretend = 0, frame = 0
+ 610              		@ frame_needed = 0, uses_anonymous_args = 0
+ 611              	.LVL47:
+ 612 0000 08B5     		push	{r3, lr}
+ 613              		.cfi_def_cfa_offset 8
+ 614              		.cfi_offset 3, -8
+ 615              		.cfi_offset 14, -4
+ 602:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c ****     return (ADC_SAR_Seq_1_SAR_CountsTo_uVolts(adcCounts));
+ 616              		.loc 1 602 0
+ 617 0002 FFF7FEFF 		bl	ADC_SAR_Seq_1_SAR_CountsTo_uVolts
+ 618              	.LVL48:
+ 603:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** }
+ 619              		.loc 1 603 0
+ 620 0006 08BD     		pop	{r3, pc}
+ 621              		.cfi_endproc
+ 622              	.LFE15:
+ 623              		.size	ADC_SAR_Seq_1_CountsTo_uVolts, .-ADC_SAR_Seq_1_CountsTo_uVolts
+ 624              		.section	.text.ADC_SAR_Seq_1_CountsTo_Volts,"ax",%progbits
+ 625              		.align	2
+ 626              		.global	ADC_SAR_Seq_1_CountsTo_Volts
+ 627              		.thumb
+ 628              		.thumb_func
+ 629              		.type	ADC_SAR_Seq_1_CountsTo_Volts, %function
+ 630              	ADC_SAR_Seq_1_CountsTo_Volts:
+ 631              	.LFB16:
+ 604:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** 
+ 605:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** 
+ 606:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** /*******************************************************************************
+ 607:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** * Function Name: ADC_SAR_Seq_1_CountsTo_Volts
+ 608:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** ********************************************************************************
+ 609:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *
+ 610:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** * Summary:
+ 611:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *  Converts the ADC output to Volts as a floating point number
+ 612:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *
+ 613:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** * Parameters:
+ 614:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *  adcCounts: Result from the ADC_SAR_Seq conversion
+ 615:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *
+ 616:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** * Return:
+ 617:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *  Result in volts
+ 618:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *
+ 619:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** * Side Effects:
+ 620:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *  None.
+ 621:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *
+ 622:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** * Reentrant:
+ 623:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *  No.
+ARM GAS  C:\Users\chris\AppData\Local\Temp\ccQmEsxZ.s 			page 23
+
+
+ 624:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *
+ 625:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** *******************************************************************************/
+ 626:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** float32 ADC_SAR_Seq_1_CountsTo_Volts(int16 adcCounts)
+ 627:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** {
+ 632              		.loc 1 627 0
+ 633              		.cfi_startproc
+ 634              		@ args = 0, pretend = 0, frame = 0
+ 635              		@ frame_needed = 0, uses_anonymous_args = 0
+ 636              	.LVL49:
+ 637 0000 08B5     		push	{r3, lr}
+ 638              		.cfi_def_cfa_offset 8
+ 639              		.cfi_offset 3, -8
+ 640              		.cfi_offset 14, -4
+ 628:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c ****     return (ADC_SAR_Seq_1_SAR_CountsTo_Volts(adcCounts));
+ 641              		.loc 1 628 0
+ 642 0002 FFF7FEFF 		bl	ADC_SAR_Seq_1_SAR_CountsTo_Volts
+ 643              	.LVL50:
+ 629:.\Generated_Source\PSoC5/ADC_SAR_Seq_1.c **** }
+ 644              		.loc 1 629 0
+ 645 0006 08BD     		pop	{r3, pc}
+ 646              		.cfi_endproc
+ 647              	.LFE16:
+ 648              		.size	ADC_SAR_Seq_1_CountsTo_Volts, .-ADC_SAR_Seq_1_CountsTo_Volts
+ 649              		.global	ADC_SAR_Seq_1_initVar
+ 650              		.comm	ADC_SAR_Seq_1_finalArray,2,4
+ 651              		.data
+ 652              		.set	.LANCHOR1,. + 0
+ 653              		.type	ADC_SAR_Seq_1_tempTD, %object
+ 654              		.size	ADC_SAR_Seq_1_tempTD, 1
+ 655              	ADC_SAR_Seq_1_tempTD:
+ 656 0000 FF       		.byte	-1
+ 657              		.type	ADC_SAR_Seq_1_finalTD, %object
+ 658              		.size	ADC_SAR_Seq_1_finalTD, 1
+ 659              	ADC_SAR_Seq_1_finalTD:
+ 660 0001 FF       		.byte	-1
+ 661              		.bss
+ 662              		.align	2
+ 663              		.set	.LANCHOR0,. + 0
+ 664              		.type	ADC_SAR_Seq_1_tempChan, %object
+ 665              		.size	ADC_SAR_Seq_1_tempChan, 1
+ 666              	ADC_SAR_Seq_1_tempChan:
+ 667 0000 00       		.space	1
+ 668              		.type	ADC_SAR_Seq_1_finalChan, %object
+ 669              		.size	ADC_SAR_Seq_1_finalChan, 1
+ 670              	ADC_SAR_Seq_1_finalChan:
+ 671 0001 00       		.space	1
+ 672 0002 0000     		.space	2
+ 673              		.type	ADC_SAR_Seq_1_tempArray.5046, %object
+ 674              		.size	ADC_SAR_Seq_1_tempArray.5046, 2
+ 675              	ADC_SAR_Seq_1_tempArray.5046:
+ 676 0004 0000     		.space	2
+ 677 0006 0000     		.space	2
+ 678              		.type	ADC_SAR_Seq_1_initVar, %object
+ 679              		.size	ADC_SAR_Seq_1_initVar, 4
+ 680              	ADC_SAR_Seq_1_initVar:
+ 681 0008 00000000 		.space	4
+ 682              		.text
+ARM GAS  C:\Users\chris\AppData\Local\Temp\ccQmEsxZ.s 			page 24
+
+
+ 683              	.Letext0:
+ 684              		.file 2 ".\\Generated_Source\\PSoC5\\cytypes.h"
+ 685              		.file 3 ".\\Generated_Source\\PSoC5\\ADC_SAR_Seq_1_SAR.h"
+ 686              		.file 4 "Generated_Source\\PSoC5/CYDMAC.H"
+ 687              		.file 5 ".\\Generated_Source\\PSoC5\\ADC_SAR_Seq_1_TempBuf_dma.h"
+ 688              		.file 6 ".\\Generated_Source\\PSoC5\\ADC_SAR_Seq_1_FinalBuf_dma.h"
+ 689              		.file 7 ".\\Generated_Source\\PSoC5\\ADC_SAR_Seq_1_IRQ.h"
+ 690              		.file 8 ".\\Generated_Source\\PSoC5\\CyLib.h"
+ 691              		.section	.debug_info,"",%progbits
+ 692              	.Ldebug_info0:
+ 693 0000 D1070000 		.4byte	0x7d1
+ 694 0004 0400     		.2byte	0x4
+ 695 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 696 000a 04       		.byte	0x4
+ 697 000b 01       		.uleb128 0x1
+ 698 000c 0D060000 		.4byte	.LASF82
+ 699 0010 01       		.byte	0x1
+ 700 0011 93010000 		.4byte	.LASF83
+ 701 0015 D6060000 		.4byte	.LASF84
+ 702 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 703 001d 00000000 		.4byte	0
+ 704 0021 00000000 		.4byte	.Ldebug_line0
+ 705 0025 02       		.uleb128 0x2
+ 706 0026 01       		.byte	0x1
+ 707 0027 06       		.byte	0x6
+ 708 0028 B8000000 		.4byte	.LASF0
+ 709 002c 02       		.uleb128 0x2
+ 710 002d 01       		.byte	0x1
+ 711 002e 08       		.byte	0x8
+ 712 002f F8040000 		.4byte	.LASF1
+ 713 0033 02       		.uleb128 0x2
+ 714 0034 02       		.byte	0x2
+ 715 0035 05       		.byte	0x5
+ 716 0036 24050000 		.4byte	.LASF2
+ 717 003a 02       		.uleb128 0x2
+ 718 003b 02       		.byte	0x2
+ 719 003c 07       		.byte	0x7
+ 720 003d 2D030000 		.4byte	.LASF3
+ 721 0041 02       		.uleb128 0x2
+ 722 0042 04       		.byte	0x4
+ 723 0043 05       		.byte	0x5
+ 724 0044 38020000 		.4byte	.LASF4
+ 725 0048 02       		.uleb128 0x2
+ 726 0049 04       		.byte	0x4
+ 727 004a 07       		.byte	0x7
+ 728 004b EE020000 		.4byte	.LASF5
+ 729 004f 02       		.uleb128 0x2
+ 730 0050 08       		.byte	0x8
+ 731 0051 05       		.byte	0x5
+ 732 0052 85010000 		.4byte	.LASF6
+ 733 0056 02       		.uleb128 0x2
+ 734 0057 08       		.byte	0x8
+ 735 0058 07       		.byte	0x7
+ 736 0059 11010000 		.4byte	.LASF7
+ 737 005d 03       		.uleb128 0x3
+ 738 005e 04       		.byte	0x4
+ 739 005f 05       		.byte	0x5
+ARM GAS  C:\Users\chris\AppData\Local\Temp\ccQmEsxZ.s 			page 25
+
+
+ 740 0060 696E7400 		.ascii	"int\000"
+ 741 0064 02       		.uleb128 0x2
+ 742 0065 04       		.byte	0x4
+ 743 0066 07       		.byte	0x7
+ 744 0067 E1020000 		.4byte	.LASF8
+ 745 006b 04       		.uleb128 0x4
+ 746 006c 60020000 		.4byte	.LASF9
+ 747 0070 02       		.byte	0x2
+ 748 0071 9201     		.2byte	0x192
+ 749 0073 2C000000 		.4byte	0x2c
+ 750 0077 04       		.uleb128 0x4
+ 751 0078 00000000 		.4byte	.LASF10
+ 752 007c 02       		.byte	0x2
+ 753 007d 9301     		.2byte	0x193
+ 754 007f 3A000000 		.4byte	0x3a
+ 755 0083 04       		.uleb128 0x4
+ 756 0084 92020000 		.4byte	.LASF11
+ 757 0088 02       		.byte	0x2
+ 758 0089 9401     		.2byte	0x194
+ 759 008b 48000000 		.4byte	0x48
+ 760 008f 04       		.uleb128 0x4
+ 761 0090 B3060000 		.4byte	.LASF12
+ 762 0094 02       		.byte	0x2
+ 763 0095 9601     		.2byte	0x196
+ 764 0097 33000000 		.4byte	0x33
+ 765 009b 04       		.uleb128 0x4
+ 766 009c BC010000 		.4byte	.LASF13
+ 767 00a0 02       		.byte	0x2
+ 768 00a1 9701     		.2byte	0x197
+ 769 00a3 41000000 		.4byte	0x41
+ 770 00a7 04       		.uleb128 0x4
+ 771 00a8 D2030000 		.4byte	.LASF14
+ 772 00ac 02       		.byte	0x2
+ 773 00ad 9801     		.2byte	0x198
+ 774 00af B3000000 		.4byte	0xb3
+ 775 00b3 02       		.uleb128 0x2
+ 776 00b4 04       		.byte	0x4
+ 777 00b5 04       		.byte	0x4
+ 778 00b6 75040000 		.4byte	.LASF15
+ 779 00ba 02       		.uleb128 0x2
+ 780 00bb 08       		.byte	0x8
+ 781 00bc 04       		.byte	0x4
+ 782 00bd 66020000 		.4byte	.LASF16
+ 783 00c1 02       		.uleb128 0x2
+ 784 00c2 01       		.byte	0x1
+ 785 00c3 08       		.byte	0x8
+ 786 00c4 97050000 		.4byte	.LASF17
+ 787 00c8 04       		.uleb128 0x4
+ 788 00c9 CD060000 		.4byte	.LASF18
+ 789 00cd 02       		.byte	0x2
+ 790 00ce 3402     		.2byte	0x234
+ 791 00d0 48000000 		.4byte	0x48
+ 792 00d4 04       		.uleb128 0x4
+ 793 00d5 D9040000 		.4byte	.LASF19
+ 794 00d9 02       		.byte	0x2
+ 795 00da 3C02     		.2byte	0x23c
+ 796 00dc E0000000 		.4byte	0xe0
+ARM GAS  C:\Users\chris\AppData\Local\Temp\ccQmEsxZ.s 			page 26
+
+
+ 797 00e0 05       		.uleb128 0x5
+ 798 00e1 6B000000 		.4byte	0x6b
+ 799 00e5 04       		.uleb128 0x4
+ 800 00e6 93030000 		.4byte	.LASF20
+ 801 00ea 02       		.byte	0x2
+ 802 00eb 3E02     		.2byte	0x23e
+ 803 00ed F1000000 		.4byte	0xf1
+ 804 00f1 05       		.uleb128 0x5
+ 805 00f2 83000000 		.4byte	0x83
+ 806 00f6 04       		.uleb128 0x4
+ 807 00f7 9C050000 		.4byte	.LASF21
+ 808 00fb 02       		.byte	0x2
+ 809 00fc 4E02     		.2byte	0x24e
+ 810 00fe 02010000 		.4byte	0x102
+ 811 0102 06       		.uleb128 0x6
+ 812 0103 04       		.byte	0x4
+ 813 0104 08010000 		.4byte	0x108
+ 814 0108 07       		.uleb128 0x7
+ 815 0109 02       		.uleb128 0x2
+ 816 010a 04       		.byte	0x4
+ 817 010b 07       		.byte	0x7
+ 818 010c DA030000 		.4byte	.LASF22
+ 819 0110 08       		.uleb128 0x8
+ 820 0111 17030000 		.4byte	.LASF23
+ 821 0115 01       		.byte	0x1
+ 822 0116 33       		.byte	0x33
+ 823 0117 00000000 		.4byte	.LFB0
+ 824 011b 3C000000 		.4byte	.LFE0-.LFB0
+ 825 011f 01       		.uleb128 0x1
+ 826 0120 9C       		.byte	0x9c
+ 827 0121 4A010000 		.4byte	0x14a
+ 828 0125 09       		.uleb128 0x9
+ 829 0126 14000000 		.4byte	.LVL0
+ 830 012a EB050000 		.4byte	0x5eb
+ 831 012e 09       		.uleb128 0x9
+ 832 012f 1C000000 		.4byte	.LVL1
+ 833 0133 00060000 		.4byte	0x600
+ 834 0137 09       		.uleb128 0x9
+ 835 0138 26000000 		.4byte	.LVL2
+ 836 013c EB050000 		.4byte	0x5eb
+ 837 0140 09       		.uleb128 0x9
+ 838 0141 2C000000 		.4byte	.LVL3
+ 839 0145 00060000 		.4byte	0x600
+ 840 0149 00       		.byte	0
+ 841 014a 08       		.uleb128 0x8
+ 842 014b 23000000 		.4byte	.LASF24
+ 843 014f 01       		.byte	0x1
+ 844 0150 53       		.byte	0x53
+ 845 0151 00000000 		.4byte	.LFB1
+ 846 0155 3C000000 		.4byte	.LFE1-.LFB1
+ 847 0159 01       		.uleb128 0x1
+ 848 015a 9C       		.byte	0x9c
+ 849 015b C4010000 		.4byte	0x1c4
+ 850 015f 0A       		.uleb128 0xa
+ 851 0160 12000000 		.4byte	.LVL4
+ 852 0164 11060000 		.4byte	0x611
+ 853 0168 85010000 		.4byte	0x185
+ARM GAS  C:\Users\chris\AppData\Local\Temp\ccQmEsxZ.s 			page 27
+
+
+ 854 016c 0B       		.uleb128 0xb
+ 855 016d 01       		.uleb128 0x1
+ 856 016e 53       		.byte	0x53
+ 857 016f 03       		.uleb128 0x3
+ 858 0170 0A       		.byte	0xa
+ 859 0171 FF1F     		.2byte	0x1fff
+ 860 0173 0B       		.uleb128 0xb
+ 861 0174 01       		.uleb128 0x1
+ 862 0175 52       		.byte	0x52
+ 863 0176 03       		.uleb128 0x3
+ 864 0177 0A       		.byte	0xa
+ 865 0178 0040     		.2byte	0x4000
+ 866 017a 0B       		.uleb128 0xb
+ 867 017b 01       		.uleb128 0x1
+ 868 017c 51       		.byte	0x51
+ 869 017d 01       		.uleb128 0x1
+ 870 017e 31       		.byte	0x31
+ 871 017f 0B       		.uleb128 0xb
+ 872 0180 01       		.uleb128 0x1
+ 873 0181 50       		.byte	0x50
+ 874 0182 01       		.uleb128 0x1
+ 875 0183 32       		.byte	0x32
+ 876 0184 00       		.byte	0
+ 877 0185 0A       		.uleb128 0xa
+ 878 0186 24000000 		.4byte	.LVL5
+ 879 018a 35060000 		.4byte	0x635
+ 880 018e AB010000 		.4byte	0x1ab
+ 881 0192 0B       		.uleb128 0xb
+ 882 0193 01       		.uleb128 0x1
+ 883 0194 53       		.byte	0x53
+ 884 0195 03       		.uleb128 0x3
+ 885 0196 0A       		.byte	0xa
+ 886 0197 FF1F     		.2byte	0x1fff
+ 887 0199 0B       		.uleb128 0xb
+ 888 019a 01       		.uleb128 0x1
+ 889 019b 52       		.byte	0x52
+ 890 019c 03       		.uleb128 0x3
+ 891 019d 0A       		.byte	0xa
+ 892 019e FF1F     		.2byte	0x1fff
+ 893 01a0 0B       		.uleb128 0xb
+ 894 01a1 01       		.uleb128 0x1
+ 895 01a2 51       		.byte	0x51
+ 896 01a3 01       		.uleb128 0x1
+ 897 01a4 31       		.byte	0x31
+ 898 01a5 0B       		.uleb128 0xb
+ 899 01a6 01       		.uleb128 0x1
+ 900 01a7 50       		.byte	0x50
+ 901 01a8 01       		.uleb128 0x1
+ 902 01a9 32       		.byte	0x32
+ 903 01aa 00       		.byte	0
+ 904 01ab 09       		.uleb128 0x9
+ 905 01ac 2C000000 		.4byte	.LVL6
+ 906 01b0 59060000 		.4byte	0x659
+ 907 01b4 0C       		.uleb128 0xc
+ 908 01b5 32000000 		.4byte	.LVL7
+ 909 01b9 6A060000 		.4byte	0x66a
+ 910 01bd 0B       		.uleb128 0xb
+ARM GAS  C:\Users\chris\AppData\Local\Temp\ccQmEsxZ.s 			page 28
+
+
+ 911 01be 01       		.uleb128 0x1
+ 912 01bf 50       		.byte	0x50
+ 913 01c0 01       		.uleb128 0x1
+ 914 01c1 32       		.byte	0x32
+ 915 01c2 00       		.byte	0
+ 916 01c3 00       		.byte	0
+ 917 01c4 08       		.uleb128 0x8
+ 918 01c5 28010000 		.4byte	.LASF25
+ 919 01c9 01       		.byte	0x1
+ 920 01ca 7B       		.byte	0x7b
+ 921 01cb 00000000 		.4byte	.LFB2
+ 922 01cf CC000000 		.4byte	.LFE2-.LFB2
+ 923 01d3 01       		.uleb128 0x1
+ 924 01d4 9C       		.byte	0x9c
+ 925 01d5 D0020000 		.4byte	0x2d0
+ 926 01d9 0D       		.uleb128 0xd
+ 927 01da F5050000 		.4byte	.LASF26
+ 928 01de 01       		.byte	0x1
+ 929 01df 7D       		.byte	0x7d
+ 930 01e0 6B000000 		.4byte	0x6b
+ 931 01e4 00000000 		.4byte	.LLST0
+ 932 01e8 0E       		.uleb128 0xe
+ 933 01e9 40030000 		.4byte	.LASF27
+ 934 01ed 01       		.byte	0x1
+ 935 01ee 7F       		.byte	0x7f
+ 936 01ef D0020000 		.4byte	0x2d0
+ 937 01f3 05       		.uleb128 0x5
+ 938 01f4 03       		.byte	0x3
+ 939 01f5 04000000 		.4byte	ADC_SAR_Seq_1_tempArray.5046
+ 940 01f9 09       		.uleb128 0x9
+ 941 01fa 0A000000 		.4byte	.LVL8
+ 942 01fe 7B060000 		.4byte	0x67b
+ 943 0202 09       		.uleb128 0x9
+ 944 0203 10000000 		.4byte	.LVL9
+ 945 0207 7B060000 		.4byte	0x67b
+ 946 020b 09       		.uleb128 0x9
+ 947 020c 1C000000 		.4byte	.LVL10
+ 948 0210 90060000 		.4byte	0x690
+ 949 0214 0A       		.uleb128 0xa
+ 950 0215 2E000000 		.4byte	.LVL11
+ 951 0219 9B060000 		.4byte	0x69b
+ 952 021d 2C020000 		.4byte	0x22c
+ 953 0221 0B       		.uleb128 0xb
+ 954 0222 01       		.uleb128 0x1
+ 955 0223 53       		.byte	0x53
+ 956 0224 01       		.uleb128 0x1
+ 957 0225 36       		.byte	0x36
+ 958 0226 0B       		.uleb128 0xb
+ 959 0227 01       		.uleb128 0x1
+ 960 0228 51       		.byte	0x51
+ 961 0229 01       		.uleb128 0x1
+ 962 022a 32       		.byte	0x32
+ 963 022b 00       		.byte	0
+ 964 022c 0A       		.uleb128 0xa
+ 965 022d 40000000 		.4byte	.LVL12
+ 966 0231 BF060000 		.4byte	0x6bf
+ 967 0235 47020000 		.4byte	0x247
+ARM GAS  C:\Users\chris\AppData\Local\Temp\ccQmEsxZ.s 			page 29
+
+
+ 968 0239 0B       		.uleb128 0xb
+ 969 023a 01       		.uleb128 0x1
+ 970 023b 52       		.byte	0x52
+ 971 023c 02       		.uleb128 0x2
+ 972 023d 74       		.byte	0x74
+ 973 023e 00       		.sleb128 0
+ 974 023f 0B       		.uleb128 0xb
+ 975 0240 01       		.uleb128 0x1
+ 976 0241 51       		.byte	0x51
+ 977 0242 03       		.uleb128 0x3
+ 978 0243 0A       		.byte	0xa
+ 979 0244 A05B     		.2byte	0x5ba0
+ 980 0246 00       		.byte	0
+ 981 0247 09       		.uleb128 0x9
+ 982 0248 48000000 		.4byte	.LVL13
+ 983 024c DE060000 		.4byte	0x6de
+ 984 0250 09       		.uleb128 0x9
+ 985 0251 52000000 		.4byte	.LVL14
+ 986 0255 90060000 		.4byte	0x690
+ 987 0259 0A       		.uleb128 0xa
+ 988 025a 62000000 		.4byte	.LVL15
+ 989 025e 9B060000 		.4byte	0x69b
+ 990 0262 71020000 		.4byte	0x271
+ 991 0266 0B       		.uleb128 0xb
+ 992 0267 01       		.uleb128 0x1
+ 993 0268 53       		.byte	0x53
+ 994 0269 01       		.uleb128 0x1
+ 995 026a 37       		.byte	0x37
+ 996 026b 0B       		.uleb128 0xb
+ 997 026c 01       		.uleb128 0x1
+ 998 026d 51       		.byte	0x51
+ 999 026e 01       		.uleb128 0x1
+ 1000 026f 32       		.byte	0x32
+ 1001 0270 00       		.byte	0
+ 1002 0271 0A       		.uleb128 0xa
+ 1003 0272 6E000000 		.4byte	.LVL16
+ 1004 0276 BF060000 		.4byte	0x6bf
+ 1005 027a 8E020000 		.4byte	0x28e
+ 1006 027e 0B       		.uleb128 0xb
+ 1007 027f 01       		.uleb128 0x1
+ 1008 0280 52       		.byte	0x52
+ 1009 0281 05       		.uleb128 0x5
+ 1010 0282 03       		.byte	0x3
+ 1011 0283 00000000 		.4byte	ADC_SAR_Seq_1_finalArray
+ 1012 0287 0B       		.uleb128 0xb
+ 1013 0288 01       		.uleb128 0x1
+ 1014 0289 51       		.byte	0x51
+ 1015 028a 02       		.uleb128 0x2
+ 1016 028b 74       		.byte	0x74
+ 1017 028c 00       		.sleb128 0
+ 1018 028d 00       		.byte	0
+ 1019 028e 09       		.uleb128 0x9
+ 1020 028f 78000000 		.4byte	.LVL17
+ 1021 0293 DE060000 		.4byte	0x6de
+ 1022 0297 0A       		.uleb128 0xa
+ 1023 0298 80000000 		.4byte	.LVL18
+ 1024 029c F8060000 		.4byte	0x6f8
+ARM GAS  C:\Users\chris\AppData\Local\Temp\ccQmEsxZ.s 			page 30
+
+
+ 1025 02a0 AA020000 		.4byte	0x2aa
+ 1026 02a4 0B       		.uleb128 0xb
+ 1027 02a5 01       		.uleb128 0x1
+ 1028 02a6 51       		.byte	0x51
+ 1029 02a7 01       		.uleb128 0x1
+ 1030 02a8 31       		.byte	0x31
+ 1031 02a9 00       		.byte	0
+ 1032 02aa 0A       		.uleb128 0xa
+ 1033 02ab 88000000 		.4byte	.LVL19
+ 1034 02af F8060000 		.4byte	0x6f8
+ 1035 02b3 BD020000 		.4byte	0x2bd
+ 1036 02b7 0B       		.uleb128 0xb
+ 1037 02b8 01       		.uleb128 0x1
+ 1038 02b9 51       		.byte	0x51
+ 1039 02ba 01       		.uleb128 0x1
+ 1040 02bb 31       		.byte	0x31
+ 1041 02bc 00       		.byte	0
+ 1042 02bd 09       		.uleb128 0x9
+ 1043 02be 8C000000 		.4byte	.LVL20
+ 1044 02c2 12070000 		.4byte	0x712
+ 1045 02c6 09       		.uleb128 0x9
+ 1046 02c7 9A000000 		.4byte	.LVL21
+ 1047 02cb 1D070000 		.4byte	0x71d
+ 1048 02cf 00       		.byte	0
+ 1049 02d0 0F       		.uleb128 0xf
+ 1050 02d1 8F000000 		.4byte	0x8f
+ 1051 02d5 E0020000 		.4byte	0x2e0
+ 1052 02d9 10       		.uleb128 0x10
+ 1053 02da 09010000 		.4byte	0x109
+ 1054 02de 00       		.byte	0
+ 1055 02df 00       		.byte	0
+ 1056 02e0 08       		.uleb128 0x8
+ 1057 02e1 FD000000 		.4byte	.LASF28
+ 1058 02e5 01       		.byte	0x1
+ 1059 02e6 D9       		.byte	0xd9
+ 1060 02e7 00000000 		.4byte	.LFB3
+ 1061 02eb 28000000 		.4byte	.LFE3-.LFB3
+ 1062 02ef 01       		.uleb128 0x1
+ 1063 02f0 9C       		.byte	0x9c
+ 1064 02f1 11030000 		.4byte	0x311
+ 1065 02f5 09       		.uleb128 0x9
+ 1066 02f6 0C000000 		.4byte	.LVL22
+ 1067 02fa 4A010000 		.4byte	0x14a
+ 1068 02fe 09       		.uleb128 0x9
+ 1069 02ff 16000000 		.4byte	.LVL23
+ 1070 0303 C4010000 		.4byte	0x1c4
+ 1071 0307 09       		.uleb128 0x9
+ 1072 0308 1A000000 		.4byte	.LVL24
+ 1073 030c 2E070000 		.4byte	0x72e
+ 1074 0310 00       		.byte	0
+ 1075 0311 08       		.uleb128 0x8
+ 1076 0312 91040000 		.4byte	.LASF29
+ 1077 0316 01       		.byte	0x1
+ 1078 0317 FC       		.byte	0xfc
+ 1079 0318 00000000 		.4byte	.LFB4
+ 1080 031c 0C000000 		.4byte	.LFE4-.LFB4
+ 1081 0320 01       		.uleb128 0x1
+ARM GAS  C:\Users\chris\AppData\Local\Temp\ccQmEsxZ.s 			page 31
+
+
+ 1082 0321 9C       		.byte	0x9c
+ 1083 0322 39030000 		.4byte	0x339
+ 1084 0326 09       		.uleb128 0x9
+ 1085 0327 06000000 		.4byte	.LVL25
+ 1086 032b 35070000 		.4byte	0x735
+ 1087 032f 09       		.uleb128 0x9
+ 1088 0330 0A000000 		.4byte	.LVL26
+ 1089 0334 10010000 		.4byte	0x110
+ 1090 0338 00       		.byte	0
+ 1091 0339 11       		.uleb128 0x11
+ 1092 033a D4000000 		.4byte	.LASF30
+ 1093 033e 01       		.byte	0x1
+ 1094 033f 1A01     		.2byte	0x11a
+ 1095 0341 00000000 		.4byte	.LFB5
+ 1096 0345 08000000 		.4byte	.LFE5-.LFB5
+ 1097 0349 01       		.uleb128 0x1
+ 1098 034a 9C       		.byte	0x9c
+ 1099 034b 59030000 		.4byte	0x359
+ 1100 034f 09       		.uleb128 0x9
+ 1101 0350 06000000 		.4byte	.LVL27
+ 1102 0354 3C070000 		.4byte	0x73c
+ 1103 0358 00       		.byte	0
+ 1104 0359 11       		.uleb128 0x11
+ 1105 035a 13040000 		.4byte	.LASF31
+ 1106 035e 01       		.byte	0x1
+ 1107 035f 4101     		.2byte	0x141
+ 1108 0361 00000000 		.4byte	.LFB6
+ 1109 0365 08000000 		.4byte	.LFE6-.LFB6
+ 1110 0369 01       		.uleb128 0x1
+ 1111 036a 9C       		.byte	0x9c
+ 1112 036b 79030000 		.4byte	0x379
+ 1113 036f 09       		.uleb128 0x9
+ 1114 0370 06000000 		.4byte	.LVL28
+ 1115 0374 43070000 		.4byte	0x743
+ 1116 0378 00       		.byte	0
+ 1117 0379 12       		.uleb128 0x12
+ 1118 037a E3030000 		.4byte	.LASF33
+ 1119 037e 01       		.byte	0x1
+ 1120 037f 6501     		.2byte	0x165
+ 1121 0381 83000000 		.4byte	0x83
+ 1122 0385 00000000 		.4byte	.LFB7
+ 1123 0389 18000000 		.4byte	.LFE7-.LFB7
+ 1124 038d 01       		.uleb128 0x1
+ 1125 038e 9C       		.byte	0x9c
+ 1126 038f B2030000 		.4byte	0x3b2
+ 1127 0393 13       		.uleb128 0x13
+ 1128 0394 C3020000 		.4byte	.LASF35
+ 1129 0398 01       		.byte	0x1
+ 1130 0399 6501     		.2byte	0x165
+ 1131 039b 6B000000 		.4byte	0x6b
+ 1132 039f 13000000 		.4byte	.LLST1
+ 1133 03a3 14       		.uleb128 0x14
+ 1134 03a4 06060000 		.4byte	.LASF32
+ 1135 03a8 01       		.byte	0x1
+ 1136 03a9 6701     		.2byte	0x167
+ 1137 03ab 6B000000 		.4byte	0x6b
+ 1138 03af 01       		.uleb128 0x1
+ARM GAS  C:\Users\chris\AppData\Local\Temp\ccQmEsxZ.s 			page 32
+
+
+ 1139 03b0 53       		.byte	0x53
+ 1140 03b1 00       		.byte	0
+ 1141 03b2 12       		.uleb128 0x12
+ 1142 03b3 55010000 		.4byte	.LASF34
+ 1143 03b7 01       		.byte	0x1
+ 1144 03b8 8701     		.2byte	0x187
+ 1145 03ba 8F000000 		.4byte	0x8f
+ 1146 03be 00000000 		.4byte	.LFB8
+ 1147 03c2 1C000000 		.4byte	.LFE8-.LFB8
+ 1148 03c6 01       		.uleb128 0x1
+ 1149 03c7 9C       		.byte	0x9c
+ 1150 03c8 DD030000 		.4byte	0x3dd
+ 1151 03cc 13       		.uleb128 0x13
+ 1152 03cd 92050000 		.4byte	.LASF36
+ 1153 03d1 01       		.byte	0x1
+ 1154 03d2 8701     		.2byte	0x187
+ 1155 03d4 77000000 		.4byte	0x77
+ 1156 03d8 34000000 		.4byte	.LLST2
+ 1157 03dc 00       		.byte	0
+ 1158 03dd 12       		.uleb128 0x12
+ 1159 03de 2D040000 		.4byte	.LASF37
+ 1160 03e2 01       		.byte	0x1
+ 1161 03e3 A101     		.2byte	0x1a1
+ 1162 03e5 8F000000 		.4byte	0x8f
+ 1163 03e9 00000000 		.4byte	.LFB9
+ 1164 03ed 08000000 		.4byte	.LFE9-.LFB9
+ 1165 03f1 01       		.uleb128 0x1
+ 1166 03f2 9C       		.byte	0x9c
+ 1167 03f3 01040000 		.4byte	0x401
+ 1168 03f7 09       		.uleb128 0x9
+ 1169 03f8 06000000 		.4byte	.LVL34
+ 1170 03fc 4A070000 		.4byte	0x74a
+ 1171 0400 00       		.byte	0
+ 1172 0401 11       		.uleb128 0x11
+ 1173 0402 08070000 		.4byte	.LASF38
+ 1174 0406 01       		.byte	0x1
+ 1175 0407 C001     		.2byte	0x1c0
+ 1176 0409 00000000 		.4byte	.LFB10
+ 1177 040d 0A000000 		.4byte	.LFE10-.LFB10
+ 1178 0411 01       		.uleb128 0x1
+ 1179 0412 9C       		.byte	0x9c
+ 1180 0413 39040000 		.4byte	0x439
+ 1181 0417 13       		.uleb128 0x13
+ 1182 0418 A9050000 		.4byte	.LASF39
+ 1183 041c 01       		.byte	0x1
+ 1184 041d C001     		.2byte	0x1c0
+ 1185 041f 9B000000 		.4byte	0x9b
+ 1186 0423 55000000 		.4byte	.LLST3
+ 1187 0427 0C       		.uleb128 0xc
+ 1188 0428 08000000 		.4byte	.LVL37
+ 1189 042c 55070000 		.4byte	0x755
+ 1190 0430 0B       		.uleb128 0xb
+ 1191 0431 01       		.uleb128 0x1
+ 1192 0432 50       		.byte	0x50
+ 1193 0433 03       		.uleb128 0x3
+ 1194 0434 F3       		.byte	0xf3
+ 1195 0435 01       		.uleb128 0x1
+ARM GAS  C:\Users\chris\AppData\Local\Temp\ccQmEsxZ.s 			page 33
+
+
+ 1196 0436 50       		.byte	0x50
+ 1197 0437 00       		.byte	0
+ 1198 0438 00       		.byte	0
+ 1199 0439 11       		.uleb128 0x11
+ 1200 043a 07000000 		.4byte	.LASF40
+ 1201 043e 01       		.byte	0x1
+ 1202 043f EB01     		.2byte	0x1eb
+ 1203 0441 00000000 		.4byte	.LFB11
+ 1204 0445 08000000 		.4byte	.LFE11-.LFB11
+ 1205 0449 01       		.uleb128 0x1
+ 1206 044a 9C       		.byte	0x9c
+ 1207 044b 69040000 		.4byte	0x469
+ 1208 044f 13       		.uleb128 0x13
+ 1209 0450 6B050000 		.4byte	.LASF41
+ 1210 0454 01       		.byte	0x1
+ 1211 0455 EB01     		.2byte	0x1eb
+ 1212 0457 6B000000 		.4byte	0x6b
+ 1213 045b 76000000 		.4byte	.LLST4
+ 1214 045f 09       		.uleb128 0x9
+ 1215 0460 06000000 		.4byte	.LVL39
+ 1216 0464 66070000 		.4byte	0x766
+ 1217 0468 00       		.byte	0
+ 1218 0469 11       		.uleb128 0x11
+ 1219 046a 7B040000 		.4byte	.LASF42
+ 1220 046e 01       		.byte	0x1
+ 1221 046f 0502     		.2byte	0x205
+ 1222 0471 00000000 		.4byte	.LFB12
+ 1223 0475 0A000000 		.4byte	.LFE12-.LFB12
+ 1224 0479 01       		.uleb128 0x1
+ 1225 047a 9C       		.byte	0x9c
+ 1226 047b A1040000 		.4byte	0x4a1
+ 1227 047f 13       		.uleb128 0x13
+ 1228 0480 36000000 		.4byte	.LASF43
+ 1229 0484 01       		.byte	0x1
+ 1230 0485 0502     		.2byte	0x205
+ 1231 0487 9B000000 		.4byte	0x9b
+ 1232 048b 97000000 		.4byte	.LLST5
+ 1233 048f 0C       		.uleb128 0xc
+ 1234 0490 08000000 		.4byte	.LVL42
+ 1235 0494 77070000 		.4byte	0x777
+ 1236 0498 0B       		.uleb128 0xb
+ 1237 0499 01       		.uleb128 0x1
+ 1238 049a 50       		.byte	0x50
+ 1239 049b 03       		.uleb128 0x3
+ 1240 049c F3       		.byte	0xf3
+ 1241 049d 01       		.uleb128 0x1
+ 1242 049e 50       		.byte	0x50
+ 1243 049f 00       		.byte	0
+ 1244 04a0 00       		.byte	0
+ 1245 04a1 11       		.uleb128 0x11
+ 1246 04a2 C2010000 		.4byte	.LASF44
+ 1247 04a6 01       		.byte	0x1
+ 1248 04a7 2402     		.2byte	0x224
+ 1249 04a9 00000000 		.4byte	.LFB13
+ 1250 04ad 08000000 		.4byte	.LFE13-.LFB13
+ 1251 04b1 01       		.uleb128 0x1
+ 1252 04b2 9C       		.byte	0x9c
+ARM GAS  C:\Users\chris\AppData\Local\Temp\ccQmEsxZ.s 			page 34
+
+
+ 1253 04b3 D9040000 		.4byte	0x4d9
+ 1254 04b7 13       		.uleb128 0x13
+ 1255 04b8 36000000 		.4byte	.LASF43
+ 1256 04bc 01       		.byte	0x1
+ 1257 04bd 2402     		.2byte	0x224
+ 1258 04bf 9B000000 		.4byte	0x9b
+ 1259 04c3 B8000000 		.4byte	.LLST6
+ 1260 04c7 0C       		.uleb128 0xc
+ 1261 04c8 06000000 		.4byte	.LVL44
+ 1262 04cc 88070000 		.4byte	0x788
+ 1263 04d0 0B       		.uleb128 0xb
+ 1264 04d1 01       		.uleb128 0x1
+ 1265 04d2 50       		.byte	0x50
+ 1266 04d3 03       		.uleb128 0x3
+ 1267 04d4 F3       		.byte	0xf3
+ 1268 04d5 01       		.uleb128 0x1
+ 1269 04d6 50       		.byte	0x50
+ 1270 04d7 00       		.byte	0
+ 1271 04d8 00       		.byte	0
+ 1272 04d9 12       		.uleb128 0x12
+ 1273 04da A5020000 		.4byte	.LASF45
+ 1274 04de 01       		.byte	0x1
+ 1275 04df 3E02     		.2byte	0x23e
+ 1276 04e1 9B000000 		.4byte	0x9b
+ 1277 04e5 00000000 		.4byte	.LFB14
+ 1278 04e9 08000000 		.4byte	.LFE14-.LFB14
+ 1279 04ed 01       		.uleb128 0x1
+ 1280 04ee 9C       		.byte	0x9c
+ 1281 04ef 0D050000 		.4byte	0x50d
+ 1282 04f3 13       		.uleb128 0x13
+ 1283 04f4 D2050000 		.4byte	.LASF46
+ 1284 04f8 01       		.byte	0x1
+ 1285 04f9 3E02     		.2byte	0x23e
+ 1286 04fb 8F000000 		.4byte	0x8f
+ 1287 04ff D9000000 		.4byte	.LLST7
+ 1288 0503 09       		.uleb128 0x9
+ 1289 0504 06000000 		.4byte	.LVL46
+ 1290 0508 99070000 		.4byte	0x799
+ 1291 050c 00       		.byte	0
+ 1292 050d 12       		.uleb128 0x12
+ 1293 050e FE010000 		.4byte	.LASF47
+ 1294 0512 01       		.byte	0x1
+ 1295 0513 5802     		.2byte	0x258
+ 1296 0515 9B000000 		.4byte	0x9b
+ 1297 0519 00000000 		.4byte	.LFB15
+ 1298 051d 08000000 		.4byte	.LFE15-.LFB15
+ 1299 0521 01       		.uleb128 0x1
+ 1300 0522 9C       		.byte	0x9c
+ 1301 0523 41050000 		.4byte	0x541
+ 1302 0527 13       		.uleb128 0x13
+ 1303 0528 D2050000 		.4byte	.LASF46
+ 1304 052c 01       		.byte	0x1
+ 1305 052d 5802     		.2byte	0x258
+ 1306 052f 8F000000 		.4byte	0x8f
+ 1307 0533 FA000000 		.4byte	.LLST8
+ 1308 0537 09       		.uleb128 0x9
+ 1309 0538 06000000 		.4byte	.LVL48
+ARM GAS  C:\Users\chris\AppData\Local\Temp\ccQmEsxZ.s 			page 35
+
+
+ 1310 053c AE070000 		.4byte	0x7ae
+ 1311 0540 00       		.byte	0
+ 1312 0541 12       		.uleb128 0x12
+ 1313 0542 2E050000 		.4byte	.LASF48
+ 1314 0546 01       		.byte	0x1
+ 1315 0547 7202     		.2byte	0x272
+ 1316 0549 A7000000 		.4byte	0xa7
+ 1317 054d 00000000 		.4byte	.LFB16
+ 1318 0551 08000000 		.4byte	.LFE16-.LFB16
+ 1319 0555 01       		.uleb128 0x1
+ 1320 0556 9C       		.byte	0x9c
+ 1321 0557 75050000 		.4byte	0x575
+ 1322 055b 13       		.uleb128 0x13
+ 1323 055c D2050000 		.4byte	.LASF46
+ 1324 0560 01       		.byte	0x1
+ 1325 0561 7202     		.2byte	0x272
+ 1326 0563 8F000000 		.4byte	0x8f
+ 1327 0567 1B010000 		.4byte	.LLST9
+ 1328 056b 09       		.uleb128 0x9
+ 1329 056c 06000000 		.4byte	.LVL50
+ 1330 0570 C3070000 		.4byte	0x7c3
+ 1331 0574 00       		.byte	0
+ 1332 0575 0E       		.uleb128 0xe
+ 1333 0576 7C030000 		.4byte	.LASF49
+ 1334 057a 01       		.byte	0x1
+ 1335 057b 19       		.byte	0x19
+ 1336 057c 6B000000 		.4byte	0x6b
+ 1337 0580 05       		.uleb128 0x5
+ 1338 0581 03       		.byte	0x3
+ 1339 0582 00000000 		.4byte	ADC_SAR_Seq_1_tempChan
+ 1340 0586 0E       		.uleb128 0xe
+ 1341 0587 5D040000 		.4byte	.LASF50
+ 1342 058b 01       		.byte	0x1
+ 1343 058c 1A       		.byte	0x1a
+ 1344 058d 6B000000 		.4byte	0x6b
+ 1345 0591 05       		.uleb128 0x5
+ 1346 0592 03       		.byte	0x3
+ 1347 0593 01000000 		.4byte	ADC_SAR_Seq_1_finalChan
+ 1348 0597 0E       		.uleb128 0xe
+ 1349 0598 54000000 		.4byte	.LASF51
+ 1350 059c 01       		.byte	0x1
+ 1351 059d 1B       		.byte	0x1b
+ 1352 059e 6B000000 		.4byte	0x6b
+ 1353 05a2 05       		.uleb128 0x5
+ 1354 05a3 03       		.byte	0x3
+ 1355 05a4 00000000 		.4byte	ADC_SAR_Seq_1_tempTD
+ 1356 05a8 0E       		.uleb128 0xe
+ 1357 05a9 CB020000 		.4byte	.LASF52
+ 1358 05ad 01       		.byte	0x1
+ 1359 05ae 1C       		.byte	0x1c
+ 1360 05af 6B000000 		.4byte	0x6b
+ 1361 05b3 05       		.uleb128 0x5
+ 1362 05b4 03       		.byte	0x3
+ 1363 05b5 01000000 		.4byte	ADC_SAR_Seq_1_finalTD
+ 1364 05b9 15       		.uleb128 0x15
+ 1365 05ba 9B060000 		.4byte	.LASF53
+ 1366 05be 03       		.byte	0x3
+ARM GAS  C:\Users\chris\AppData\Local\Temp\ccQmEsxZ.s 			page 36
+
+
+ 1367 05bf 5B       		.byte	0x5b
+ 1368 05c0 C4050000 		.4byte	0x5c4
+ 1369 05c4 05       		.uleb128 0x5
+ 1370 05c5 8F000000 		.4byte	0x8f
+ 1371 05c9 16       		.uleb128 0x16
+ 1372 05ca DC050000 		.4byte	.LASF54
+ 1373 05ce 01       		.byte	0x1
+ 1374 05cf 17       		.byte	0x17
+ 1375 05d0 D0020000 		.4byte	0x2d0
+ 1376 05d4 05       		.uleb128 0x5
+ 1377 05d5 03       		.byte	0x3
+ 1378 05d6 00000000 		.4byte	ADC_SAR_Seq_1_finalArray
+ 1379 05da 16       		.uleb128 0x16
+ 1380 05db 6F010000 		.4byte	.LASF55
+ 1381 05df 01       		.byte	0x1
+ 1382 05e0 18       		.byte	0x18
+ 1383 05e1 83000000 		.4byte	0x83
+ 1384 05e5 05       		.uleb128 0x5
+ 1385 05e6 03       		.byte	0x3
+ 1386 05e7 00000000 		.4byte	ADC_SAR_Seq_1_initVar
+ 1387 05eb 17       		.uleb128 0x17
+ 1388 05ec 69000000 		.4byte	.LASF56
+ 1389 05f0 04       		.byte	0x4
+ 1390 05f1 2A       		.byte	0x2a
+ 1391 05f2 C8000000 		.4byte	0xc8
+ 1392 05f6 00060000 		.4byte	0x600
+ 1393 05fa 18       		.uleb128 0x18
+ 1394 05fb 6B000000 		.4byte	0x6b
+ 1395 05ff 00       		.byte	0
+ 1396 0600 19       		.uleb128 0x19
+ 1397 0601 99020000 		.4byte	.LASF59
+ 1398 0605 04       		.byte	0x4
+ 1399 0606 39       		.byte	0x39
+ 1400 0607 11060000 		.4byte	0x611
+ 1401 060b 18       		.uleb128 0x18
+ 1402 060c 6B000000 		.4byte	0x6b
+ 1403 0610 00       		.byte	0
+ 1404 0611 17       		.uleb128 0x17
+ 1405 0612 58030000 		.4byte	.LASF57
+ 1406 0616 05       		.byte	0x5
+ 1407 0617 1E       		.byte	0x1e
+ 1408 0618 6B000000 		.4byte	0x6b
+ 1409 061c 35060000 		.4byte	0x635
+ 1410 0620 18       		.uleb128 0x18
+ 1411 0621 6B000000 		.4byte	0x6b
+ 1412 0625 18       		.uleb128 0x18
+ 1413 0626 6B000000 		.4byte	0x6b
+ 1414 062a 18       		.uleb128 0x18
+ 1415 062b 77000000 		.4byte	0x77
+ 1416 062f 18       		.uleb128 0x18
+ 1417 0630 77000000 		.4byte	0x77
+ 1418 0634 00       		.byte	0
+ 1419 0635 17       		.uleb128 0x17
+ 1420 0636 6D020000 		.4byte	.LASF58
+ 1421 063a 06       		.byte	0x6
+ 1422 063b 1E       		.byte	0x1e
+ 1423 063c 6B000000 		.4byte	0x6b
+ARM GAS  C:\Users\chris\AppData\Local\Temp\ccQmEsxZ.s 			page 37
+
+
+ 1424 0640 59060000 		.4byte	0x659
+ 1425 0644 18       		.uleb128 0x18
+ 1426 0645 6B000000 		.4byte	0x6b
+ 1427 0649 18       		.uleb128 0x18
+ 1428 064a 6B000000 		.4byte	0x6b
+ 1429 064e 18       		.uleb128 0x18
+ 1430 064f 77000000 		.4byte	0x77
+ 1431 0653 18       		.uleb128 0x18
+ 1432 0654 77000000 		.4byte	0x77
+ 1433 0658 00       		.byte	0
+ 1434 0659 19       		.uleb128 0x19
+ 1435 065a 1C020000 		.4byte	.LASF60
+ 1436 065e 07       		.byte	0x7
+ 1437 065f 1D       		.byte	0x1d
+ 1438 0660 6A060000 		.4byte	0x66a
+ 1439 0664 18       		.uleb128 0x18
+ 1440 0665 F6000000 		.4byte	0xf6
+ 1441 0669 00       		.byte	0
+ 1442 066a 19       		.uleb128 0x19
+ 1443 066b 06050000 		.4byte	.LASF61
+ 1444 066f 07       		.byte	0x7
+ 1445 0670 20       		.byte	0x20
+ 1446 0671 7B060000 		.4byte	0x67b
+ 1447 0675 18       		.uleb128 0x18
+ 1448 0676 6B000000 		.4byte	0x6b
+ 1449 067a 00       		.byte	0
+ 1450 067b 17       		.uleb128 0x17
+ 1451 067c 48040000 		.4byte	.LASF62
+ 1452 0680 04       		.byte	0x4
+ 1453 0681 2B       		.byte	0x2b
+ 1454 0682 C8000000 		.4byte	0xc8
+ 1455 0686 90060000 		.4byte	0x690
+ 1456 068a 18       		.uleb128 0x18
+ 1457 068b 6B000000 		.4byte	0x6b
+ 1458 068f 00       		.byte	0
+ 1459 0690 1A       		.uleb128 0x1a
+ 1460 0691 C4000000 		.4byte	.LASF67
+ 1461 0695 04       		.byte	0x4
+ 1462 0696 38       		.byte	0x38
+ 1463 0697 6B000000 		.4byte	0x6b
+ 1464 069b 17       		.uleb128 0x17
+ 1465 069c 3D010000 		.4byte	.LASF63
+ 1466 06a0 04       		.byte	0x4
+ 1467 06a1 3B       		.byte	0x3b
+ 1468 06a2 C8000000 		.4byte	0xc8
+ 1469 06a6 BF060000 		.4byte	0x6bf
+ 1470 06aa 18       		.uleb128 0x18
+ 1471 06ab 6B000000 		.4byte	0x6b
+ 1472 06af 18       		.uleb128 0x18
+ 1473 06b0 77000000 		.4byte	0x77
+ 1474 06b4 18       		.uleb128 0x18
+ 1475 06b5 6B000000 		.4byte	0x6b
+ 1476 06b9 18       		.uleb128 0x18
+ 1477 06ba 6B000000 		.4byte	0x6b
+ 1478 06be 00       		.byte	0
+ 1479 06bf 17       		.uleb128 0x17
+ 1480 06c0 01040000 		.4byte	.LASF64
+ARM GAS  C:\Users\chris\AppData\Local\Temp\ccQmEsxZ.s 			page 38
+
+
+ 1481 06c4 04       		.byte	0x4
+ 1482 06c5 3F       		.byte	0x3f
+ 1483 06c6 C8000000 		.4byte	0xc8
+ 1484 06ca DE060000 		.4byte	0x6de
+ 1485 06ce 18       		.uleb128 0x18
+ 1486 06cf 6B000000 		.4byte	0x6b
+ 1487 06d3 18       		.uleb128 0x18
+ 1488 06d4 77000000 		.4byte	0x77
+ 1489 06d8 18       		.uleb128 0x18
+ 1490 06d9 77000000 		.4byte	0x77
+ 1491 06dd 00       		.byte	0
+ 1492 06de 17       		.uleb128 0x17
+ 1493 06df B9060000 		.4byte	.LASF65
+ 1494 06e3 04       		.byte	0x4
+ 1495 06e4 2F       		.byte	0x2f
+ 1496 06e5 C8000000 		.4byte	0xc8
+ 1497 06e9 F8060000 		.4byte	0x6f8
+ 1498 06ed 18       		.uleb128 0x18
+ 1499 06ee 6B000000 		.4byte	0x6b
+ 1500 06f2 18       		.uleb128 0x18
+ 1501 06f3 6B000000 		.4byte	0x6b
+ 1502 06f7 00       		.byte	0
+ 1503 06f8 17       		.uleb128 0x17
+ 1504 06f9 EF000000 		.4byte	.LASF66
+ 1505 06fd 04       		.byte	0x4
+ 1506 06fe 29       		.byte	0x29
+ 1507 06ff C8000000 		.4byte	0xc8
+ 1508 0703 12070000 		.4byte	0x712
+ 1509 0707 18       		.uleb128 0x18
+ 1510 0708 6B000000 		.4byte	0x6b
+ 1511 070c 18       		.uleb128 0x18
+ 1512 070d 6B000000 		.4byte	0x6b
+ 1513 0711 00       		.byte	0
+ 1514 0712 1A       		.uleb128 0x1a
+ 1515 0713 00030000 		.4byte	.LASF68
+ 1516 0717 08       		.byte	0x8
+ 1517 0718 7D       		.byte	0x7d
+ 1518 0719 6B000000 		.4byte	0x6b
+ 1519 071d 19       		.uleb128 0x19
+ 1520 071e 3E000000 		.4byte	.LASF69
+ 1521 0722 08       		.byte	0x8
+ 1522 0723 7E       		.byte	0x7e
+ 1523 0724 2E070000 		.4byte	0x72e
+ 1524 0728 18       		.uleb128 0x18
+ 1525 0729 6B000000 		.4byte	0x6b
+ 1526 072d 00       		.byte	0
+ 1527 072e 1B       		.uleb128 0x1b
+ 1528 072f 99030000 		.4byte	.LASF70
+ 1529 0733 03       		.byte	0x3
+ 1530 0734 34       		.byte	0x34
+ 1531 0735 1B       		.uleb128 0x1b
+ 1532 0736 A4040000 		.4byte	.LASF71
+ 1533 073a 03       		.byte	0x3
+ 1534 073b 35       		.byte	0x35
+ 1535 073c 1B       		.uleb128 0x1b
+ 1536 073d 41020000 		.4byte	.LASF72
+ 1537 0741 03       		.byte	0x3
+ARM GAS  C:\Users\chris\AppData\Local\Temp\ccQmEsxZ.s 			page 39
+
+
+ 1538 0742 D1       		.byte	0xd1
+ 1539 0743 1B       		.uleb128 0x1b
+ 1540 0744 9A000000 		.4byte	.LASF73
+ 1541 0748 03       		.byte	0x3
+ 1542 0749 D2       		.byte	0xd2
+ 1543 074a 1A       		.uleb128 0x1a
+ 1544 074b BB040000 		.4byte	.LASF74
+ 1545 074f 03       		.byte	0x3
+ 1546 0750 3B       		.byte	0x3b
+ 1547 0751 8F000000 		.4byte	0x8f
+ 1548 0755 19       		.uleb128 0x19
+ 1549 0756 76050000 		.4byte	.LASF75
+ 1550 075a 03       		.byte	0x3
+ 1551 075b 3D       		.byte	0x3d
+ 1552 075c 66070000 		.4byte	0x766
+ 1553 0760 18       		.uleb128 0x18
+ 1554 0761 8F000000 		.4byte	0x8f
+ 1555 0765 00       		.byte	0
+ 1556 0766 19       		.uleb128 0x19
+ 1557 0767 4B050000 		.4byte	.LASF76
+ 1558 076b 03       		.byte	0x3
+ 1559 076c 37       		.byte	0x37
+ 1560 076d 77070000 		.4byte	0x777
+ 1561 0771 18       		.uleb128 0x18
+ 1562 0772 6B000000 		.4byte	0x6b
+ 1563 0776 00       		.byte	0
+ 1564 0777 19       		.uleb128 0x19
+ 1565 0778 DE040000 		.4byte	.LASF77
+ 1566 077c 03       		.byte	0x3
+ 1567 077d 50       		.byte	0x50
+ 1568 077e 88070000 		.4byte	0x788
+ 1569 0782 18       		.uleb128 0x18
+ 1570 0783 8F000000 		.4byte	0x8f
+ 1571 0787 00       		.byte	0
+ 1572 0788 19       		.uleb128 0x19
+ 1573 0789 DE010000 		.4byte	.LASF78
+ 1574 078d 03       		.byte	0x3
+ 1575 078e 3E       		.byte	0x3e
+ 1576 078f 99070000 		.4byte	0x799
+ 1577 0793 18       		.uleb128 0x18
+ 1578 0794 9B000000 		.4byte	0x9b
+ 1579 0798 00       		.byte	0
+ 1580 0799 17       		.uleb128 0x17
+ 1581 079a 78000000 		.4byte	.LASF79
+ 1582 079e 03       		.byte	0x3
+ 1583 079f 3F       		.byte	0x3f
+ 1584 07a0 8F000000 		.4byte	0x8f
+ 1585 07a4 AE070000 		.4byte	0x7ae
+ 1586 07a8 18       		.uleb128 0x18
+ 1587 07a9 8F000000 		.4byte	0x8f
+ 1588 07ad 00       		.byte	0
+ 1589 07ae 17       		.uleb128 0x17
+ 1590 07af B0050000 		.4byte	.LASF80
+ 1591 07b3 03       		.byte	0x3
+ 1592 07b4 40       		.byte	0x40
+ 1593 07b5 9B000000 		.4byte	0x9b
+ 1594 07b9 C3070000 		.4byte	0x7c3
+ARM GAS  C:\Users\chris\AppData\Local\Temp\ccQmEsxZ.s 			page 40
+
+
+ 1595 07bd 18       		.uleb128 0x18
+ 1596 07be 8F000000 		.4byte	0x8f
+ 1597 07c2 00       		.byte	0
+ 1598 07c3 1C       		.uleb128 0x1c
+ 1599 07c4 B1030000 		.4byte	.LASF81
+ 1600 07c8 03       		.byte	0x3
+ 1601 07c9 41       		.byte	0x41
+ 1602 07ca A7000000 		.4byte	0xa7
+ 1603 07ce 18       		.uleb128 0x18
+ 1604 07cf 8F000000 		.4byte	0x8f
+ 1605 07d3 00       		.byte	0
+ 1606 07d4 00       		.byte	0
+ 1607              		.section	.debug_abbrev,"",%progbits
+ 1608              	.Ldebug_abbrev0:
+ 1609 0000 01       		.uleb128 0x1
+ 1610 0001 11       		.uleb128 0x11
+ 1611 0002 01       		.byte	0x1
+ 1612 0003 25       		.uleb128 0x25
+ 1613 0004 0E       		.uleb128 0xe
+ 1614 0005 13       		.uleb128 0x13
+ 1615 0006 0B       		.uleb128 0xb
+ 1616 0007 03       		.uleb128 0x3
+ 1617 0008 0E       		.uleb128 0xe
+ 1618 0009 1B       		.uleb128 0x1b
+ 1619 000a 0E       		.uleb128 0xe
+ 1620 000b 55       		.uleb128 0x55
+ 1621 000c 17       		.uleb128 0x17
+ 1622 000d 11       		.uleb128 0x11
+ 1623 000e 01       		.uleb128 0x1
+ 1624 000f 10       		.uleb128 0x10
+ 1625 0010 17       		.uleb128 0x17
+ 1626 0011 00       		.byte	0
+ 1627 0012 00       		.byte	0
+ 1628 0013 02       		.uleb128 0x2
+ 1629 0014 24       		.uleb128 0x24
+ 1630 0015 00       		.byte	0
+ 1631 0016 0B       		.uleb128 0xb
+ 1632 0017 0B       		.uleb128 0xb
+ 1633 0018 3E       		.uleb128 0x3e
+ 1634 0019 0B       		.uleb128 0xb
+ 1635 001a 03       		.uleb128 0x3
+ 1636 001b 0E       		.uleb128 0xe
+ 1637 001c 00       		.byte	0
+ 1638 001d 00       		.byte	0
+ 1639 001e 03       		.uleb128 0x3
+ 1640 001f 24       		.uleb128 0x24
+ 1641 0020 00       		.byte	0
+ 1642 0021 0B       		.uleb128 0xb
+ 1643 0022 0B       		.uleb128 0xb
+ 1644 0023 3E       		.uleb128 0x3e
+ 1645 0024 0B       		.uleb128 0xb
+ 1646 0025 03       		.uleb128 0x3
+ 1647 0026 08       		.uleb128 0x8
+ 1648 0027 00       		.byte	0
+ 1649 0028 00       		.byte	0
+ 1650 0029 04       		.uleb128 0x4
+ 1651 002a 16       		.uleb128 0x16
+ARM GAS  C:\Users\chris\AppData\Local\Temp\ccQmEsxZ.s 			page 41
+
+
+ 1652 002b 00       		.byte	0
+ 1653 002c 03       		.uleb128 0x3
+ 1654 002d 0E       		.uleb128 0xe
+ 1655 002e 3A       		.uleb128 0x3a
+ 1656 002f 0B       		.uleb128 0xb
+ 1657 0030 3B       		.uleb128 0x3b
+ 1658 0031 05       		.uleb128 0x5
+ 1659 0032 49       		.uleb128 0x49
+ 1660 0033 13       		.uleb128 0x13
+ 1661 0034 00       		.byte	0
+ 1662 0035 00       		.byte	0
+ 1663 0036 05       		.uleb128 0x5
+ 1664 0037 35       		.uleb128 0x35
+ 1665 0038 00       		.byte	0
+ 1666 0039 49       		.uleb128 0x49
+ 1667 003a 13       		.uleb128 0x13
+ 1668 003b 00       		.byte	0
+ 1669 003c 00       		.byte	0
+ 1670 003d 06       		.uleb128 0x6
+ 1671 003e 0F       		.uleb128 0xf
+ 1672 003f 00       		.byte	0
+ 1673 0040 0B       		.uleb128 0xb
+ 1674 0041 0B       		.uleb128 0xb
+ 1675 0042 49       		.uleb128 0x49
+ 1676 0043 13       		.uleb128 0x13
+ 1677 0044 00       		.byte	0
+ 1678 0045 00       		.byte	0
+ 1679 0046 07       		.uleb128 0x7
+ 1680 0047 15       		.uleb128 0x15
+ 1681 0048 00       		.byte	0
+ 1682 0049 27       		.uleb128 0x27
+ 1683 004a 19       		.uleb128 0x19
+ 1684 004b 00       		.byte	0
+ 1685 004c 00       		.byte	0
+ 1686 004d 08       		.uleb128 0x8
+ 1687 004e 2E       		.uleb128 0x2e
+ 1688 004f 01       		.byte	0x1
+ 1689 0050 3F       		.uleb128 0x3f
+ 1690 0051 19       		.uleb128 0x19
+ 1691 0052 03       		.uleb128 0x3
+ 1692 0053 0E       		.uleb128 0xe
+ 1693 0054 3A       		.uleb128 0x3a
+ 1694 0055 0B       		.uleb128 0xb
+ 1695 0056 3B       		.uleb128 0x3b
+ 1696 0057 0B       		.uleb128 0xb
+ 1697 0058 27       		.uleb128 0x27
+ 1698 0059 19       		.uleb128 0x19
+ 1699 005a 11       		.uleb128 0x11
+ 1700 005b 01       		.uleb128 0x1
+ 1701 005c 12       		.uleb128 0x12
+ 1702 005d 06       		.uleb128 0x6
+ 1703 005e 40       		.uleb128 0x40
+ 1704 005f 18       		.uleb128 0x18
+ 1705 0060 9742     		.uleb128 0x2117
+ 1706 0062 19       		.uleb128 0x19
+ 1707 0063 01       		.uleb128 0x1
+ 1708 0064 13       		.uleb128 0x13
+ARM GAS  C:\Users\chris\AppData\Local\Temp\ccQmEsxZ.s 			page 42
+
+
+ 1709 0065 00       		.byte	0
+ 1710 0066 00       		.byte	0
+ 1711 0067 09       		.uleb128 0x9
+ 1712 0068 898201   		.uleb128 0x4109
+ 1713 006b 00       		.byte	0
+ 1714 006c 11       		.uleb128 0x11
+ 1715 006d 01       		.uleb128 0x1
+ 1716 006e 31       		.uleb128 0x31
+ 1717 006f 13       		.uleb128 0x13
+ 1718 0070 00       		.byte	0
+ 1719 0071 00       		.byte	0
+ 1720 0072 0A       		.uleb128 0xa
+ 1721 0073 898201   		.uleb128 0x4109
+ 1722 0076 01       		.byte	0x1
+ 1723 0077 11       		.uleb128 0x11
+ 1724 0078 01       		.uleb128 0x1
+ 1725 0079 31       		.uleb128 0x31
+ 1726 007a 13       		.uleb128 0x13
+ 1727 007b 01       		.uleb128 0x1
+ 1728 007c 13       		.uleb128 0x13
+ 1729 007d 00       		.byte	0
+ 1730 007e 00       		.byte	0
+ 1731 007f 0B       		.uleb128 0xb
+ 1732 0080 8A8201   		.uleb128 0x410a
+ 1733 0083 00       		.byte	0
+ 1734 0084 02       		.uleb128 0x2
+ 1735 0085 18       		.uleb128 0x18
+ 1736 0086 9142     		.uleb128 0x2111
+ 1737 0088 18       		.uleb128 0x18
+ 1738 0089 00       		.byte	0
+ 1739 008a 00       		.byte	0
+ 1740 008b 0C       		.uleb128 0xc
+ 1741 008c 898201   		.uleb128 0x4109
+ 1742 008f 01       		.byte	0x1
+ 1743 0090 11       		.uleb128 0x11
+ 1744 0091 01       		.uleb128 0x1
+ 1745 0092 31       		.uleb128 0x31
+ 1746 0093 13       		.uleb128 0x13
+ 1747 0094 00       		.byte	0
+ 1748 0095 00       		.byte	0
+ 1749 0096 0D       		.uleb128 0xd
+ 1750 0097 34       		.uleb128 0x34
+ 1751 0098 00       		.byte	0
+ 1752 0099 03       		.uleb128 0x3
+ 1753 009a 0E       		.uleb128 0xe
+ 1754 009b 3A       		.uleb128 0x3a
+ 1755 009c 0B       		.uleb128 0xb
+ 1756 009d 3B       		.uleb128 0x3b
+ 1757 009e 0B       		.uleb128 0xb
+ 1758 009f 49       		.uleb128 0x49
+ 1759 00a0 13       		.uleb128 0x13
+ 1760 00a1 02       		.uleb128 0x2
+ 1761 00a2 17       		.uleb128 0x17
+ 1762 00a3 00       		.byte	0
+ 1763 00a4 00       		.byte	0
+ 1764 00a5 0E       		.uleb128 0xe
+ 1765 00a6 34       		.uleb128 0x34
+ARM GAS  C:\Users\chris\AppData\Local\Temp\ccQmEsxZ.s 			page 43
+
+
+ 1766 00a7 00       		.byte	0
+ 1767 00a8 03       		.uleb128 0x3
+ 1768 00a9 0E       		.uleb128 0xe
+ 1769 00aa 3A       		.uleb128 0x3a
+ 1770 00ab 0B       		.uleb128 0xb
+ 1771 00ac 3B       		.uleb128 0x3b
+ 1772 00ad 0B       		.uleb128 0xb
+ 1773 00ae 49       		.uleb128 0x49
+ 1774 00af 13       		.uleb128 0x13
+ 1775 00b0 02       		.uleb128 0x2
+ 1776 00b1 18       		.uleb128 0x18
+ 1777 00b2 00       		.byte	0
+ 1778 00b3 00       		.byte	0
+ 1779 00b4 0F       		.uleb128 0xf
+ 1780 00b5 01       		.uleb128 0x1
+ 1781 00b6 01       		.byte	0x1
+ 1782 00b7 49       		.uleb128 0x49
+ 1783 00b8 13       		.uleb128 0x13
+ 1784 00b9 01       		.uleb128 0x1
+ 1785 00ba 13       		.uleb128 0x13
+ 1786 00bb 00       		.byte	0
+ 1787 00bc 00       		.byte	0
+ 1788 00bd 10       		.uleb128 0x10
+ 1789 00be 21       		.uleb128 0x21
+ 1790 00bf 00       		.byte	0
+ 1791 00c0 49       		.uleb128 0x49
+ 1792 00c1 13       		.uleb128 0x13
+ 1793 00c2 2F       		.uleb128 0x2f
+ 1794 00c3 0B       		.uleb128 0xb
+ 1795 00c4 00       		.byte	0
+ 1796 00c5 00       		.byte	0
+ 1797 00c6 11       		.uleb128 0x11
+ 1798 00c7 2E       		.uleb128 0x2e
+ 1799 00c8 01       		.byte	0x1
+ 1800 00c9 3F       		.uleb128 0x3f
+ 1801 00ca 19       		.uleb128 0x19
+ 1802 00cb 03       		.uleb128 0x3
+ 1803 00cc 0E       		.uleb128 0xe
+ 1804 00cd 3A       		.uleb128 0x3a
+ 1805 00ce 0B       		.uleb128 0xb
+ 1806 00cf 3B       		.uleb128 0x3b
+ 1807 00d0 05       		.uleb128 0x5
+ 1808 00d1 27       		.uleb128 0x27
+ 1809 00d2 19       		.uleb128 0x19
+ 1810 00d3 11       		.uleb128 0x11
+ 1811 00d4 01       		.uleb128 0x1
+ 1812 00d5 12       		.uleb128 0x12
+ 1813 00d6 06       		.uleb128 0x6
+ 1814 00d7 40       		.uleb128 0x40
+ 1815 00d8 18       		.uleb128 0x18
+ 1816 00d9 9742     		.uleb128 0x2117
+ 1817 00db 19       		.uleb128 0x19
+ 1818 00dc 01       		.uleb128 0x1
+ 1819 00dd 13       		.uleb128 0x13
+ 1820 00de 00       		.byte	0
+ 1821 00df 00       		.byte	0
+ 1822 00e0 12       		.uleb128 0x12
+ARM GAS  C:\Users\chris\AppData\Local\Temp\ccQmEsxZ.s 			page 44
+
+
+ 1823 00e1 2E       		.uleb128 0x2e
+ 1824 00e2 01       		.byte	0x1
+ 1825 00e3 3F       		.uleb128 0x3f
+ 1826 00e4 19       		.uleb128 0x19
+ 1827 00e5 03       		.uleb128 0x3
+ 1828 00e6 0E       		.uleb128 0xe
+ 1829 00e7 3A       		.uleb128 0x3a
+ 1830 00e8 0B       		.uleb128 0xb
+ 1831 00e9 3B       		.uleb128 0x3b
+ 1832 00ea 05       		.uleb128 0x5
+ 1833 00eb 27       		.uleb128 0x27
+ 1834 00ec 19       		.uleb128 0x19
+ 1835 00ed 49       		.uleb128 0x49
+ 1836 00ee 13       		.uleb128 0x13
+ 1837 00ef 11       		.uleb128 0x11
+ 1838 00f0 01       		.uleb128 0x1
+ 1839 00f1 12       		.uleb128 0x12
+ 1840 00f2 06       		.uleb128 0x6
+ 1841 00f3 40       		.uleb128 0x40
+ 1842 00f4 18       		.uleb128 0x18
+ 1843 00f5 9742     		.uleb128 0x2117
+ 1844 00f7 19       		.uleb128 0x19
+ 1845 00f8 01       		.uleb128 0x1
+ 1846 00f9 13       		.uleb128 0x13
+ 1847 00fa 00       		.byte	0
+ 1848 00fb 00       		.byte	0
+ 1849 00fc 13       		.uleb128 0x13
+ 1850 00fd 05       		.uleb128 0x5
+ 1851 00fe 00       		.byte	0
+ 1852 00ff 03       		.uleb128 0x3
+ 1853 0100 0E       		.uleb128 0xe
+ 1854 0101 3A       		.uleb128 0x3a
+ 1855 0102 0B       		.uleb128 0xb
+ 1856 0103 3B       		.uleb128 0x3b
+ 1857 0104 05       		.uleb128 0x5
+ 1858 0105 49       		.uleb128 0x49
+ 1859 0106 13       		.uleb128 0x13
+ 1860 0107 02       		.uleb128 0x2
+ 1861 0108 17       		.uleb128 0x17
+ 1862 0109 00       		.byte	0
+ 1863 010a 00       		.byte	0
+ 1864 010b 14       		.uleb128 0x14
+ 1865 010c 34       		.uleb128 0x34
+ 1866 010d 00       		.byte	0
+ 1867 010e 03       		.uleb128 0x3
+ 1868 010f 0E       		.uleb128 0xe
+ 1869 0110 3A       		.uleb128 0x3a
+ 1870 0111 0B       		.uleb128 0xb
+ 1871 0112 3B       		.uleb128 0x3b
+ 1872 0113 05       		.uleb128 0x5
+ 1873 0114 49       		.uleb128 0x49
+ 1874 0115 13       		.uleb128 0x13
+ 1875 0116 02       		.uleb128 0x2
+ 1876 0117 18       		.uleb128 0x18
+ 1877 0118 00       		.byte	0
+ 1878 0119 00       		.byte	0
+ 1879 011a 15       		.uleb128 0x15
+ARM GAS  C:\Users\chris\AppData\Local\Temp\ccQmEsxZ.s 			page 45
+
+
+ 1880 011b 34       		.uleb128 0x34
+ 1881 011c 00       		.byte	0
+ 1882 011d 03       		.uleb128 0x3
+ 1883 011e 0E       		.uleb128 0xe
+ 1884 011f 3A       		.uleb128 0x3a
+ 1885 0120 0B       		.uleb128 0xb
+ 1886 0121 3B       		.uleb128 0x3b
+ 1887 0122 0B       		.uleb128 0xb
+ 1888 0123 49       		.uleb128 0x49
+ 1889 0124 13       		.uleb128 0x13
+ 1890 0125 3F       		.uleb128 0x3f
+ 1891 0126 19       		.uleb128 0x19
+ 1892 0127 3C       		.uleb128 0x3c
+ 1893 0128 19       		.uleb128 0x19
+ 1894 0129 00       		.byte	0
+ 1895 012a 00       		.byte	0
+ 1896 012b 16       		.uleb128 0x16
+ 1897 012c 34       		.uleb128 0x34
+ 1898 012d 00       		.byte	0
+ 1899 012e 03       		.uleb128 0x3
+ 1900 012f 0E       		.uleb128 0xe
+ 1901 0130 3A       		.uleb128 0x3a
+ 1902 0131 0B       		.uleb128 0xb
+ 1903 0132 3B       		.uleb128 0x3b
+ 1904 0133 0B       		.uleb128 0xb
+ 1905 0134 49       		.uleb128 0x49
+ 1906 0135 13       		.uleb128 0x13
+ 1907 0136 3F       		.uleb128 0x3f
+ 1908 0137 19       		.uleb128 0x19
+ 1909 0138 02       		.uleb128 0x2
+ 1910 0139 18       		.uleb128 0x18
+ 1911 013a 00       		.byte	0
+ 1912 013b 00       		.byte	0
+ 1913 013c 17       		.uleb128 0x17
+ 1914 013d 2E       		.uleb128 0x2e
+ 1915 013e 01       		.byte	0x1
+ 1916 013f 3F       		.uleb128 0x3f
+ 1917 0140 19       		.uleb128 0x19
+ 1918 0141 03       		.uleb128 0x3
+ 1919 0142 0E       		.uleb128 0xe
+ 1920 0143 3A       		.uleb128 0x3a
+ 1921 0144 0B       		.uleb128 0xb
+ 1922 0145 3B       		.uleb128 0x3b
+ 1923 0146 0B       		.uleb128 0xb
+ 1924 0147 27       		.uleb128 0x27
+ 1925 0148 19       		.uleb128 0x19
+ 1926 0149 49       		.uleb128 0x49
+ 1927 014a 13       		.uleb128 0x13
+ 1928 014b 3C       		.uleb128 0x3c
+ 1929 014c 19       		.uleb128 0x19
+ 1930 014d 01       		.uleb128 0x1
+ 1931 014e 13       		.uleb128 0x13
+ 1932 014f 00       		.byte	0
+ 1933 0150 00       		.byte	0
+ 1934 0151 18       		.uleb128 0x18
+ 1935 0152 05       		.uleb128 0x5
+ 1936 0153 00       		.byte	0
+ARM GAS  C:\Users\chris\AppData\Local\Temp\ccQmEsxZ.s 			page 46
+
+
+ 1937 0154 49       		.uleb128 0x49
+ 1938 0155 13       		.uleb128 0x13
+ 1939 0156 00       		.byte	0
+ 1940 0157 00       		.byte	0
+ 1941 0158 19       		.uleb128 0x19
+ 1942 0159 2E       		.uleb128 0x2e
+ 1943 015a 01       		.byte	0x1
+ 1944 015b 3F       		.uleb128 0x3f
+ 1945 015c 19       		.uleb128 0x19
+ 1946 015d 03       		.uleb128 0x3
+ 1947 015e 0E       		.uleb128 0xe
+ 1948 015f 3A       		.uleb128 0x3a
+ 1949 0160 0B       		.uleb128 0xb
+ 1950 0161 3B       		.uleb128 0x3b
+ 1951 0162 0B       		.uleb128 0xb
+ 1952 0163 27       		.uleb128 0x27
+ 1953 0164 19       		.uleb128 0x19
+ 1954 0165 3C       		.uleb128 0x3c
+ 1955 0166 19       		.uleb128 0x19
+ 1956 0167 01       		.uleb128 0x1
+ 1957 0168 13       		.uleb128 0x13
+ 1958 0169 00       		.byte	0
+ 1959 016a 00       		.byte	0
+ 1960 016b 1A       		.uleb128 0x1a
+ 1961 016c 2E       		.uleb128 0x2e
+ 1962 016d 00       		.byte	0
+ 1963 016e 3F       		.uleb128 0x3f
+ 1964 016f 19       		.uleb128 0x19
+ 1965 0170 03       		.uleb128 0x3
+ 1966 0171 0E       		.uleb128 0xe
+ 1967 0172 3A       		.uleb128 0x3a
+ 1968 0173 0B       		.uleb128 0xb
+ 1969 0174 3B       		.uleb128 0x3b
+ 1970 0175 0B       		.uleb128 0xb
+ 1971 0176 27       		.uleb128 0x27
+ 1972 0177 19       		.uleb128 0x19
+ 1973 0178 49       		.uleb128 0x49
+ 1974 0179 13       		.uleb128 0x13
+ 1975 017a 3C       		.uleb128 0x3c
+ 1976 017b 19       		.uleb128 0x19
+ 1977 017c 00       		.byte	0
+ 1978 017d 00       		.byte	0
+ 1979 017e 1B       		.uleb128 0x1b
+ 1980 017f 2E       		.uleb128 0x2e
+ 1981 0180 00       		.byte	0
+ 1982 0181 3F       		.uleb128 0x3f
+ 1983 0182 19       		.uleb128 0x19
+ 1984 0183 03       		.uleb128 0x3
+ 1985 0184 0E       		.uleb128 0xe
+ 1986 0185 3A       		.uleb128 0x3a
+ 1987 0186 0B       		.uleb128 0xb
+ 1988 0187 3B       		.uleb128 0x3b
+ 1989 0188 0B       		.uleb128 0xb
+ 1990 0189 27       		.uleb128 0x27
+ 1991 018a 19       		.uleb128 0x19
+ 1992 018b 3C       		.uleb128 0x3c
+ 1993 018c 19       		.uleb128 0x19
+ARM GAS  C:\Users\chris\AppData\Local\Temp\ccQmEsxZ.s 			page 47
+
+
+ 1994 018d 00       		.byte	0
+ 1995 018e 00       		.byte	0
+ 1996 018f 1C       		.uleb128 0x1c
+ 1997 0190 2E       		.uleb128 0x2e
+ 1998 0191 01       		.byte	0x1
+ 1999 0192 3F       		.uleb128 0x3f
+ 2000 0193 19       		.uleb128 0x19
+ 2001 0194 03       		.uleb128 0x3
+ 2002 0195 0E       		.uleb128 0xe
+ 2003 0196 3A       		.uleb128 0x3a
+ 2004 0197 0B       		.uleb128 0xb
+ 2005 0198 3B       		.uleb128 0x3b
+ 2006 0199 0B       		.uleb128 0xb
+ 2007 019a 27       		.uleb128 0x27
+ 2008 019b 19       		.uleb128 0x19
+ 2009 019c 49       		.uleb128 0x49
+ 2010 019d 13       		.uleb128 0x13
+ 2011 019e 3C       		.uleb128 0x3c
+ 2012 019f 19       		.uleb128 0x19
+ 2013 01a0 00       		.byte	0
+ 2014 01a1 00       		.byte	0
+ 2015 01a2 00       		.byte	0
+ 2016              		.section	.debug_loc,"",%progbits
+ 2017              	.Ldebug_loc0:
+ 2018              	.LLST0:
+ 2019 0000 8C000000 		.4byte	.LVL20
+ 2020 0004 99000000 		.4byte	.LVL21-1
+ 2021 0008 0100     		.2byte	0x1
+ 2022 000a 50       		.byte	0x50
+ 2023 000b 00000000 		.4byte	0
+ 2024 000f 00000000 		.4byte	0
+ 2025              	.LLST1:
+ 2026 0013 00000000 		.4byte	.LVL29
+ 2027 0017 10000000 		.4byte	.LVL31
+ 2028 001b 0100     		.2byte	0x1
+ 2029 001d 50       		.byte	0x50
+ 2030 001e 10000000 		.4byte	.LVL31
+ 2031 0022 18000000 		.4byte	.LFE7
+ 2032 0026 0400     		.2byte	0x4
+ 2033 0028 F3       		.byte	0xf3
+ 2034 0029 01       		.uleb128 0x1
+ 2035 002a 50       		.byte	0x50
+ 2036 002b 9F       		.byte	0x9f
+ 2037 002c 00000000 		.4byte	0
+ 2038 0030 00000000 		.4byte	0
+ 2039              	.LLST2:
+ 2040 0034 00000000 		.4byte	.LVL32
+ 2041 0038 02000000 		.4byte	.LVL33
+ 2042 003c 0100     		.2byte	0x1
+ 2043 003e 50       		.byte	0x50
+ 2044 003f 02000000 		.4byte	.LVL33
+ 2045 0043 1C000000 		.4byte	.LFE8
+ 2046 0047 0400     		.2byte	0x4
+ 2047 0049 F3       		.byte	0xf3
+ 2048 004a 01       		.uleb128 0x1
+ 2049 004b 50       		.byte	0x50
+ 2050 004c 9F       		.byte	0x9f
+ARM GAS  C:\Users\chris\AppData\Local\Temp\ccQmEsxZ.s 			page 48
+
+
+ 2051 004d 00000000 		.4byte	0
+ 2052 0051 00000000 		.4byte	0
+ 2053              	.LLST3:
+ 2054 0055 00000000 		.4byte	.LVL35
+ 2055 0059 04000000 		.4byte	.LVL36
+ 2056 005d 0100     		.2byte	0x1
+ 2057 005f 50       		.byte	0x50
+ 2058 0060 04000000 		.4byte	.LVL36
+ 2059 0064 0A000000 		.4byte	.LFE10
+ 2060 0068 0400     		.2byte	0x4
+ 2061 006a F3       		.byte	0xf3
+ 2062 006b 01       		.uleb128 0x1
+ 2063 006c 50       		.byte	0x50
+ 2064 006d 9F       		.byte	0x9f
+ 2065 006e 00000000 		.4byte	0
+ 2066 0072 00000000 		.4byte	0
+ 2067              	.LLST4:
+ 2068 0076 00000000 		.4byte	.LVL38
+ 2069 007a 05000000 		.4byte	.LVL39-1
+ 2070 007e 0100     		.2byte	0x1
+ 2071 0080 50       		.byte	0x50
+ 2072 0081 05000000 		.4byte	.LVL39-1
+ 2073 0085 08000000 		.4byte	.LFE11
+ 2074 0089 0400     		.2byte	0x4
+ 2075 008b F3       		.byte	0xf3
+ 2076 008c 01       		.uleb128 0x1
+ 2077 008d 50       		.byte	0x50
+ 2078 008e 9F       		.byte	0x9f
+ 2079 008f 00000000 		.4byte	0
+ 2080 0093 00000000 		.4byte	0
+ 2081              	.LLST5:
+ 2082 0097 00000000 		.4byte	.LVL40
+ 2083 009b 04000000 		.4byte	.LVL41
+ 2084 009f 0100     		.2byte	0x1
+ 2085 00a1 50       		.byte	0x50
+ 2086 00a2 04000000 		.4byte	.LVL41
+ 2087 00a6 0A000000 		.4byte	.LFE12
+ 2088 00aa 0400     		.2byte	0x4
+ 2089 00ac F3       		.byte	0xf3
+ 2090 00ad 01       		.uleb128 0x1
+ 2091 00ae 50       		.byte	0x50
+ 2092 00af 9F       		.byte	0x9f
+ 2093 00b0 00000000 		.4byte	0
+ 2094 00b4 00000000 		.4byte	0
+ 2095              	.LLST6:
+ 2096 00b8 00000000 		.4byte	.LVL43
+ 2097 00bc 05000000 		.4byte	.LVL44-1
+ 2098 00c0 0100     		.2byte	0x1
+ 2099 00c2 50       		.byte	0x50
+ 2100 00c3 05000000 		.4byte	.LVL44-1
+ 2101 00c7 08000000 		.4byte	.LFE13
+ 2102 00cb 0400     		.2byte	0x4
+ 2103 00cd F3       		.byte	0xf3
+ 2104 00ce 01       		.uleb128 0x1
+ 2105 00cf 50       		.byte	0x50
+ 2106 00d0 9F       		.byte	0x9f
+ 2107 00d1 00000000 		.4byte	0
+ARM GAS  C:\Users\chris\AppData\Local\Temp\ccQmEsxZ.s 			page 49
+
+
+ 2108 00d5 00000000 		.4byte	0
+ 2109              	.LLST7:
+ 2110 00d9 00000000 		.4byte	.LVL45
+ 2111 00dd 05000000 		.4byte	.LVL46-1
+ 2112 00e1 0100     		.2byte	0x1
+ 2113 00e3 50       		.byte	0x50
+ 2114 00e4 05000000 		.4byte	.LVL46-1
+ 2115 00e8 08000000 		.4byte	.LFE14
+ 2116 00ec 0400     		.2byte	0x4
+ 2117 00ee F3       		.byte	0xf3
+ 2118 00ef 01       		.uleb128 0x1
+ 2119 00f0 50       		.byte	0x50
+ 2120 00f1 9F       		.byte	0x9f
+ 2121 00f2 00000000 		.4byte	0
+ 2122 00f6 00000000 		.4byte	0
+ 2123              	.LLST8:
+ 2124 00fa 00000000 		.4byte	.LVL47
+ 2125 00fe 05000000 		.4byte	.LVL48-1
+ 2126 0102 0100     		.2byte	0x1
+ 2127 0104 50       		.byte	0x50
+ 2128 0105 05000000 		.4byte	.LVL48-1
+ 2129 0109 08000000 		.4byte	.LFE15
+ 2130 010d 0400     		.2byte	0x4
+ 2131 010f F3       		.byte	0xf3
+ 2132 0110 01       		.uleb128 0x1
+ 2133 0111 50       		.byte	0x50
+ 2134 0112 9F       		.byte	0x9f
+ 2135 0113 00000000 		.4byte	0
+ 2136 0117 00000000 		.4byte	0
+ 2137              	.LLST9:
+ 2138 011b 00000000 		.4byte	.LVL49
+ 2139 011f 05000000 		.4byte	.LVL50-1
+ 2140 0123 0100     		.2byte	0x1
+ 2141 0125 50       		.byte	0x50
+ 2142 0126 05000000 		.4byte	.LVL50-1
+ 2143 012a 08000000 		.4byte	.LFE16
+ 2144 012e 0400     		.2byte	0x4
+ 2145 0130 F3       		.byte	0xf3
+ 2146 0131 01       		.uleb128 0x1
+ 2147 0132 50       		.byte	0x50
+ 2148 0133 9F       		.byte	0x9f
+ 2149 0134 00000000 		.4byte	0
+ 2150 0138 00000000 		.4byte	0
+ 2151              		.section	.debug_aranges,"",%progbits
+ 2152 0000 9C000000 		.4byte	0x9c
+ 2153 0004 0200     		.2byte	0x2
+ 2154 0006 00000000 		.4byte	.Ldebug_info0
+ 2155 000a 04       		.byte	0x4
+ 2156 000b 00       		.byte	0
+ 2157 000c 0000     		.2byte	0
+ 2158 000e 0000     		.2byte	0
+ 2159 0010 00000000 		.4byte	.LFB0
+ 2160 0014 3C000000 		.4byte	.LFE0-.LFB0
+ 2161 0018 00000000 		.4byte	.LFB1
+ 2162 001c 3C000000 		.4byte	.LFE1-.LFB1
+ 2163 0020 00000000 		.4byte	.LFB2
+ 2164 0024 CC000000 		.4byte	.LFE2-.LFB2
+ARM GAS  C:\Users\chris\AppData\Local\Temp\ccQmEsxZ.s 			page 50
+
+
+ 2165 0028 00000000 		.4byte	.LFB3
+ 2166 002c 28000000 		.4byte	.LFE3-.LFB3
+ 2167 0030 00000000 		.4byte	.LFB4
+ 2168 0034 0C000000 		.4byte	.LFE4-.LFB4
+ 2169 0038 00000000 		.4byte	.LFB5
+ 2170 003c 08000000 		.4byte	.LFE5-.LFB5
+ 2171 0040 00000000 		.4byte	.LFB6
+ 2172 0044 08000000 		.4byte	.LFE6-.LFB6
+ 2173 0048 00000000 		.4byte	.LFB7
+ 2174 004c 18000000 		.4byte	.LFE7-.LFB7
+ 2175 0050 00000000 		.4byte	.LFB8
+ 2176 0054 1C000000 		.4byte	.LFE8-.LFB8
+ 2177 0058 00000000 		.4byte	.LFB9
+ 2178 005c 08000000 		.4byte	.LFE9-.LFB9
+ 2179 0060 00000000 		.4byte	.LFB10
+ 2180 0064 0A000000 		.4byte	.LFE10-.LFB10
+ 2181 0068 00000000 		.4byte	.LFB11
+ 2182 006c 08000000 		.4byte	.LFE11-.LFB11
+ 2183 0070 00000000 		.4byte	.LFB12
+ 2184 0074 0A000000 		.4byte	.LFE12-.LFB12
+ 2185 0078 00000000 		.4byte	.LFB13
+ 2186 007c 08000000 		.4byte	.LFE13-.LFB13
+ 2187 0080 00000000 		.4byte	.LFB14
+ 2188 0084 08000000 		.4byte	.LFE14-.LFB14
+ 2189 0088 00000000 		.4byte	.LFB15
+ 2190 008c 08000000 		.4byte	.LFE15-.LFB15
+ 2191 0090 00000000 		.4byte	.LFB16
+ 2192 0094 08000000 		.4byte	.LFE16-.LFB16
+ 2193 0098 00000000 		.4byte	0
+ 2194 009c 00000000 		.4byte	0
+ 2195              		.section	.debug_ranges,"",%progbits
+ 2196              	.Ldebug_ranges0:
+ 2197 0000 00000000 		.4byte	.LFB0
+ 2198 0004 3C000000 		.4byte	.LFE0
+ 2199 0008 00000000 		.4byte	.LFB1
+ 2200 000c 3C000000 		.4byte	.LFE1
+ 2201 0010 00000000 		.4byte	.LFB2
+ 2202 0014 CC000000 		.4byte	.LFE2
+ 2203 0018 00000000 		.4byte	.LFB3
+ 2204 001c 28000000 		.4byte	.LFE3
+ 2205 0020 00000000 		.4byte	.LFB4
+ 2206 0024 0C000000 		.4byte	.LFE4
+ 2207 0028 00000000 		.4byte	.LFB5
+ 2208 002c 08000000 		.4byte	.LFE5
+ 2209 0030 00000000 		.4byte	.LFB6
+ 2210 0034 08000000 		.4byte	.LFE6
+ 2211 0038 00000000 		.4byte	.LFB7
+ 2212 003c 18000000 		.4byte	.LFE7
+ 2213 0040 00000000 		.4byte	.LFB8
+ 2214 0044 1C000000 		.4byte	.LFE8
+ 2215 0048 00000000 		.4byte	.LFB9
+ 2216 004c 08000000 		.4byte	.LFE9
+ 2217 0050 00000000 		.4byte	.LFB10
+ 2218 0054 0A000000 		.4byte	.LFE10
+ 2219 0058 00000000 		.4byte	.LFB11
+ 2220 005c 08000000 		.4byte	.LFE11
+ 2221 0060 00000000 		.4byte	.LFB12
+ARM GAS  C:\Users\chris\AppData\Local\Temp\ccQmEsxZ.s 			page 51
+
+
+ 2222 0064 0A000000 		.4byte	.LFE12
+ 2223 0068 00000000 		.4byte	.LFB13
+ 2224 006c 08000000 		.4byte	.LFE13
+ 2225 0070 00000000 		.4byte	.LFB14
+ 2226 0074 08000000 		.4byte	.LFE14
+ 2227 0078 00000000 		.4byte	.LFB15
+ 2228 007c 08000000 		.4byte	.LFE15
+ 2229 0080 00000000 		.4byte	.LFB16
+ 2230 0084 08000000 		.4byte	.LFE16
+ 2231 0088 00000000 		.4byte	0
+ 2232 008c 00000000 		.4byte	0
+ 2233              		.section	.debug_line,"",%progbits
+ 2234              	.Ldebug_line0:
+ 2235 0000 49020000 		.section	.debug_str,"MS",%progbits,1
+ 2235      0200E700 
+ 2235      00000201 
+ 2235      FB0E0D00 
+ 2235      01010101 
+ 2236              	.LASF10:
+ 2237 0000 75696E74 		.ascii	"uint16\000"
+ 2237      313600
+ 2238              	.LASF40:
+ 2239 0007 4144435F 		.ascii	"ADC_SAR_Seq_1_SetResolution\000"
+ 2239      5341525F 
+ 2239      5365715F 
+ 2239      315F5365 
+ 2239      74526573 
+ 2240              	.LASF24:
+ 2241 0023 4144435F 		.ascii	"ADC_SAR_Seq_1_Init\000"
+ 2241      5341525F 
+ 2241      5365715F 
+ 2241      315F496E 
+ 2241      697400
+ 2242              	.LASF43:
+ 2243 0036 61646347 		.ascii	"adcGain\000"
+ 2243      61696E00 
+ 2244              	.LASF69:
+ 2245 003e 43794578 		.ascii	"CyExitCriticalSection\000"
+ 2245      69744372 
+ 2245      69746963 
+ 2245      616C5365 
+ 2245      6374696F 
+ 2246              	.LASF51:
+ 2247 0054 4144435F 		.ascii	"ADC_SAR_Seq_1_tempTD\000"
+ 2247      5341525F 
+ 2247      5365715F 
+ 2247      315F7465 
+ 2247      6D705444 
+ 2248              	.LASF56:
+ 2249 0069 4379446D 		.ascii	"CyDmaChDisable\000"
+ 2249      61436844 
+ 2249      69736162 
+ 2249      6C6500
+ 2250              	.LASF79:
+ 2251 0078 4144435F 		.ascii	"ADC_SAR_Seq_1_SAR_CountsTo_mVolts\000"
+ 2251      5341525F 
+ 2251      5365715F 
+ARM GAS  C:\Users\chris\AppData\Local\Temp\ccQmEsxZ.s 			page 52
+
+
+ 2251      315F5341 
+ 2251      525F436F 
+ 2252              	.LASF73:
+ 2253 009a 4144435F 		.ascii	"ADC_SAR_Seq_1_SAR_StopConvert\000"
+ 2253      5341525F 
+ 2253      5365715F 
+ 2253      315F5341 
+ 2253      525F5374 
+ 2254              	.LASF0:
+ 2255 00b8 7369676E 		.ascii	"signed char\000"
+ 2255      65642063 
+ 2255      68617200 
+ 2256              	.LASF67:
+ 2257 00c4 4379446D 		.ascii	"CyDmaTdAllocate\000"
+ 2257      61546441 
+ 2257      6C6C6F63 
+ 2257      61746500 
+ 2258              	.LASF30:
+ 2259 00d4 4144435F 		.ascii	"ADC_SAR_Seq_1_StartConvert\000"
+ 2259      5341525F 
+ 2259      5365715F 
+ 2259      315F5374 
+ 2259      61727443 
+ 2260              	.LASF66:
+ 2261 00ef 4379446D 		.ascii	"CyDmaChEnable\000"
+ 2261      61436845 
+ 2261      6E61626C 
+ 2261      6500
+ 2262              	.LASF28:
+ 2263 00fd 4144435F 		.ascii	"ADC_SAR_Seq_1_Start\000"
+ 2263      5341525F 
+ 2263      5365715F 
+ 2263      315F5374 
+ 2263      61727400 
+ 2264              	.LASF7:
+ 2265 0111 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 2265      206C6F6E 
+ 2265      6720756E 
+ 2265      7369676E 
+ 2265      65642069 
+ 2266              	.LASF25:
+ 2267 0128 4144435F 		.ascii	"ADC_SAR_Seq_1_Enable\000"
+ 2267      5341525F 
+ 2267      5365715F 
+ 2267      315F456E 
+ 2267      61626C65 
+ 2268              	.LASF63:
+ 2269 013d 4379446D 		.ascii	"CyDmaTdSetConfiguration\000"
+ 2269      61546453 
+ 2269      6574436F 
+ 2269      6E666967 
+ 2269      75726174 
+ 2270              	.LASF34:
+ 2271 0155 4144435F 		.ascii	"ADC_SAR_Seq_1_GetResult16\000"
+ 2271      5341525F 
+ 2271      5365715F 
+ 2271      315F4765 
+ARM GAS  C:\Users\chris\AppData\Local\Temp\ccQmEsxZ.s 			page 53
+
+
+ 2271      74526573 
+ 2272              	.LASF55:
+ 2273 016f 4144435F 		.ascii	"ADC_SAR_Seq_1_initVar\000"
+ 2273      5341525F 
+ 2273      5365715F 
+ 2273      315F696E 
+ 2273      69745661 
+ 2274              	.LASF6:
+ 2275 0185 6C6F6E67 		.ascii	"long long int\000"
+ 2275      206C6F6E 
+ 2275      6720696E 
+ 2275      7400
+ 2276              	.LASF83:
+ 2277 0193 2E5C4765 		.ascii	".\\Generated_Source\\PSoC5\\ADC_SAR_Seq_1.c\000"
+ 2277      6E657261 
+ 2277      7465645F 
+ 2277      536F7572 
+ 2277      63655C50 
+ 2278              	.LASF13:
+ 2279 01bc 696E7433 		.ascii	"int32\000"
+ 2279      3200
+ 2280              	.LASF44:
+ 2281 01c2 4144435F 		.ascii	"ADC_SAR_Seq_1_SetScaledGain\000"
+ 2281      5341525F 
+ 2281      5365715F 
+ 2281      315F5365 
+ 2281      74536361 
+ 2282              	.LASF78:
+ 2283 01de 4144435F 		.ascii	"ADC_SAR_Seq_1_SAR_SetScaledGain\000"
+ 2283      5341525F 
+ 2283      5365715F 
+ 2283      315F5341 
+ 2283      525F5365 
+ 2284              	.LASF47:
+ 2285 01fe 4144435F 		.ascii	"ADC_SAR_Seq_1_CountsTo_uVolts\000"
+ 2285      5341525F 
+ 2285      5365715F 
+ 2285      315F436F 
+ 2285      756E7473 
+ 2286              	.LASF60:
+ 2287 021c 4144435F 		.ascii	"ADC_SAR_Seq_1_IRQ_SetVector\000"
+ 2287      5341525F 
+ 2287      5365715F 
+ 2287      315F4952 
+ 2287      515F5365 
+ 2288              	.LASF4:
+ 2289 0238 6C6F6E67 		.ascii	"long int\000"
+ 2289      20696E74 
+ 2289      00
+ 2290              	.LASF72:
+ 2291 0241 4144435F 		.ascii	"ADC_SAR_Seq_1_SAR_StartConvert\000"
+ 2291      5341525F 
+ 2291      5365715F 
+ 2291      315F5341 
+ 2291      525F5374 
+ 2292              	.LASF9:
+ 2293 0260 75696E74 		.ascii	"uint8\000"
+ARM GAS  C:\Users\chris\AppData\Local\Temp\ccQmEsxZ.s 			page 54
+
+
+ 2293      3800
+ 2294              	.LASF16:
+ 2295 0266 646F7562 		.ascii	"double\000"
+ 2295      6C6500
+ 2296              	.LASF58:
+ 2297 026d 4144435F 		.ascii	"ADC_SAR_Seq_1_FinalBuf_DmaInitialize\000"
+ 2297      5341525F 
+ 2297      5365715F 
+ 2297      315F4669 
+ 2297      6E616C42 
+ 2298              	.LASF11:
+ 2299 0292 75696E74 		.ascii	"uint32\000"
+ 2299      333200
+ 2300              	.LASF59:
+ 2301 0299 4379446D 		.ascii	"CyDmaTdFree\000"
+ 2301      61546446 
+ 2301      72656500 
+ 2302              	.LASF45:
+ 2303 02a5 4144435F 		.ascii	"ADC_SAR_Seq_1_CountsTo_mVolts\000"
+ 2303      5341525F 
+ 2303      5365715F 
+ 2303      315F436F 
+ 2303      756E7473 
+ 2304              	.LASF35:
+ 2305 02c3 7265744D 		.ascii	"retMode\000"
+ 2305      6F646500 
+ 2306              	.LASF52:
+ 2307 02cb 4144435F 		.ascii	"ADC_SAR_Seq_1_finalTD\000"
+ 2307      5341525F 
+ 2307      5365715F 
+ 2307      315F6669 
+ 2307      6E616C54 
+ 2308              	.LASF8:
+ 2309 02e1 756E7369 		.ascii	"unsigned int\000"
+ 2309      676E6564 
+ 2309      20696E74 
+ 2309      00
+ 2310              	.LASF5:
+ 2311 02ee 6C6F6E67 		.ascii	"long unsigned int\000"
+ 2311      20756E73 
+ 2311      69676E65 
+ 2311      6420696E 
+ 2311      7400
+ 2312              	.LASF68:
+ 2313 0300 4379456E 		.ascii	"CyEnterCriticalSection\000"
+ 2313      74657243 
+ 2313      72697469 
+ 2313      63616C53 
+ 2313      65637469 
+ 2314              	.LASF23:
+ 2315 0317 4144435F 		.ascii	"ADC_SAR_Seq_1_Disable\000"
+ 2315      5341525F 
+ 2315      5365715F 
+ 2315      315F4469 
+ 2315      7361626C 
+ 2316              	.LASF3:
+ 2317 032d 73686F72 		.ascii	"short unsigned int\000"
+ARM GAS  C:\Users\chris\AppData\Local\Temp\ccQmEsxZ.s 			page 55
+
+
+ 2317      7420756E 
+ 2317      7369676E 
+ 2317      65642069 
+ 2317      6E7400
+ 2318              	.LASF27:
+ 2319 0340 4144435F 		.ascii	"ADC_SAR_Seq_1_tempArray\000"
+ 2319      5341525F 
+ 2319      5365715F 
+ 2319      315F7465 
+ 2319      6D704172 
+ 2320              	.LASF57:
+ 2321 0358 4144435F 		.ascii	"ADC_SAR_Seq_1_TempBuf_DmaInitialize\000"
+ 2321      5341525F 
+ 2321      5365715F 
+ 2321      315F5465 
+ 2321      6D704275 
+ 2322              	.LASF49:
+ 2323 037c 4144435F 		.ascii	"ADC_SAR_Seq_1_tempChan\000"
+ 2323      5341525F 
+ 2323      5365715F 
+ 2323      315F7465 
+ 2323      6D704368 
+ 2324              	.LASF20:
+ 2325 0393 72656733 		.ascii	"reg32\000"
+ 2325      3200
+ 2326              	.LASF70:
+ 2327 0399 4144435F 		.ascii	"ADC_SAR_Seq_1_SAR_Start\000"
+ 2327      5341525F 
+ 2327      5365715F 
+ 2327      315F5341 
+ 2327      525F5374 
+ 2328              	.LASF81:
+ 2329 03b1 4144435F 		.ascii	"ADC_SAR_Seq_1_SAR_CountsTo_Volts\000"
+ 2329      5341525F 
+ 2329      5365715F 
+ 2329      315F5341 
+ 2329      525F436F 
+ 2330              	.LASF14:
+ 2331 03d2 666C6F61 		.ascii	"float32\000"
+ 2331      74333200 
+ 2332              	.LASF22:
+ 2333 03da 73697A65 		.ascii	"sizetype\000"
+ 2333      74797065 
+ 2333      00
+ 2334              	.LASF33:
+ 2335 03e3 4144435F 		.ascii	"ADC_SAR_Seq_1_IsEndConversion\000"
+ 2335      5341525F 
+ 2335      5365715F 
+ 2335      315F4973 
+ 2335      456E6443 
+ 2336              	.LASF64:
+ 2337 0401 4379446D 		.ascii	"CyDmaTdSetAddress\000"
+ 2337      61546453 
+ 2337      65744164 
+ 2337      64726573 
+ 2337      7300
+ 2338              	.LASF31:
+ARM GAS  C:\Users\chris\AppData\Local\Temp\ccQmEsxZ.s 			page 56
+
+
+ 2339 0413 4144435F 		.ascii	"ADC_SAR_Seq_1_StopConvert\000"
+ 2339      5341525F 
+ 2339      5365715F 
+ 2339      315F5374 
+ 2339      6F70436F 
+ 2340              	.LASF37:
+ 2341 042d 4144435F 		.ascii	"ADC_SAR_Seq_1_GetAdcResult\000"
+ 2341      5341525F 
+ 2341      5365715F 
+ 2341      315F4765 
+ 2341      74416463 
+ 2342              	.LASF62:
+ 2343 0448 4379446D 		.ascii	"CyDmaClearPendingDrq\000"
+ 2343      61436C65 
+ 2343      61725065 
+ 2343      6E64696E 
+ 2343      67447271 
+ 2344              	.LASF50:
+ 2345 045d 4144435F 		.ascii	"ADC_SAR_Seq_1_finalChan\000"
+ 2345      5341525F 
+ 2345      5365715F 
+ 2345      315F6669 
+ 2345      6E616C43 
+ 2346              	.LASF15:
+ 2347 0475 666C6F61 		.ascii	"float\000"
+ 2347      7400
+ 2348              	.LASF42:
+ 2349 047b 4144435F 		.ascii	"ADC_SAR_Seq_1_SetGain\000"
+ 2349      5341525F 
+ 2349      5365715F 
+ 2349      315F5365 
+ 2349      74476169 
+ 2350              	.LASF29:
+ 2351 0491 4144435F 		.ascii	"ADC_SAR_Seq_1_Stop\000"
+ 2351      5341525F 
+ 2351      5365715F 
+ 2351      315F5374 
+ 2351      6F7000
+ 2352              	.LASF71:
+ 2353 04a4 4144435F 		.ascii	"ADC_SAR_Seq_1_SAR_Stop\000"
+ 2353      5341525F 
+ 2353      5365715F 
+ 2353      315F5341 
+ 2353      525F5374 
+ 2354              	.LASF74:
+ 2355 04bb 4144435F 		.ascii	"ADC_SAR_Seq_1_SAR_GetResult16\000"
+ 2355      5341525F 
+ 2355      5365715F 
+ 2355      315F5341 
+ 2355      525F4765 
+ 2356              	.LASF19:
+ 2357 04d9 72656738 		.ascii	"reg8\000"
+ 2357      00
+ 2358              	.LASF77:
+ 2359 04de 4144435F 		.ascii	"ADC_SAR_Seq_1_SAR_SetGain\000"
+ 2359      5341525F 
+ 2359      5365715F 
+ARM GAS  C:\Users\chris\AppData\Local\Temp\ccQmEsxZ.s 			page 57
+
+
+ 2359      315F5341 
+ 2359      525F5365 
+ 2360              	.LASF1:
+ 2361 04f8 756E7369 		.ascii	"unsigned char\000"
+ 2361      676E6564 
+ 2361      20636861 
+ 2361      7200
+ 2362              	.LASF61:
+ 2363 0506 4144435F 		.ascii	"ADC_SAR_Seq_1_IRQ_SetPriority\000"
+ 2363      5341525F 
+ 2363      5365715F 
+ 2363      315F4952 
+ 2363      515F5365 
+ 2364              	.LASF2:
+ 2365 0524 73686F72 		.ascii	"short int\000"
+ 2365      7420696E 
+ 2365      7400
+ 2366              	.LASF48:
+ 2367 052e 4144435F 		.ascii	"ADC_SAR_Seq_1_CountsTo_Volts\000"
+ 2367      5341525F 
+ 2367      5365715F 
+ 2367      315F436F 
+ 2367      756E7473 
+ 2368              	.LASF76:
+ 2369 054b 4144435F 		.ascii	"ADC_SAR_Seq_1_SAR_SetResolution\000"
+ 2369      5341525F 
+ 2369      5365715F 
+ 2369      315F5341 
+ 2369      525F5365 
+ 2370              	.LASF41:
+ 2371 056b 7265736F 		.ascii	"resolution\000"
+ 2371      6C757469 
+ 2371      6F6E00
+ 2372              	.LASF75:
+ 2373 0576 4144435F 		.ascii	"ADC_SAR_Seq_1_SAR_SetOffset\000"
+ 2373      5341525F 
+ 2373      5365715F 
+ 2373      315F5341 
+ 2373      525F5365 
+ 2374              	.LASF36:
+ 2375 0592 6368616E 		.ascii	"chan\000"
+ 2375      00
+ 2376              	.LASF17:
+ 2377 0597 63686172 		.ascii	"char\000"
+ 2377      00
+ 2378              	.LASF21:
+ 2379 059c 63796973 		.ascii	"cyisraddress\000"
+ 2379      72616464 
+ 2379      72657373 
+ 2379      00
+ 2380              	.LASF39:
+ 2381 05a9 6F666673 		.ascii	"offset\000"
+ 2381      657400
+ 2382              	.LASF80:
+ 2383 05b0 4144435F 		.ascii	"ADC_SAR_Seq_1_SAR_CountsTo_uVolts\000"
+ 2383      5341525F 
+ 2383      5365715F 
+ARM GAS  C:\Users\chris\AppData\Local\Temp\ccQmEsxZ.s 			page 58
+
+
+ 2383      315F5341 
+ 2383      525F436F 
+ 2384              	.LASF46:
+ 2385 05d2 61646343 		.ascii	"adcCounts\000"
+ 2385      6F756E74 
+ 2385      7300
+ 2386              	.LASF54:
+ 2387 05dc 4144435F 		.ascii	"ADC_SAR_Seq_1_finalArray\000"
+ 2387      5341525F 
+ 2387      5365715F 
+ 2387      315F6669 
+ 2387      6E616C41 
+ 2388              	.LASF26:
+ 2389 05f5 656E6162 		.ascii	"enableInterrupts\000"
+ 2389      6C65496E 
+ 2389      74657272 
+ 2389      75707473 
+ 2389      00
+ 2390              	.LASF32:
+ 2391 0606 73746174 		.ascii	"status\000"
+ 2391      757300
+ 2392              	.LASF82:
+ 2393 060d 474E5520 		.ascii	"GNU C 4.9.3 20150303 (release) [ARM/embedded-4_9-br"
+ 2393      4320342E 
+ 2393      392E3320 
+ 2393      32303135 
+ 2393      30333033 
+ 2394 0640 616E6368 		.ascii	"anch revision 221220] -mcpu=cortex-m3 -mthumb -g -O"
+ 2394      20726576 
+ 2394      6973696F 
+ 2394      6E203232 
+ 2394      31323230 
+ 2395 0673 67202D66 		.ascii	"g -ffunction-sections -ffat-lto-objects\000"
+ 2395      66756E63 
+ 2395      74696F6E 
+ 2395      2D736563 
+ 2395      74696F6E 
+ 2396              	.LASF53:
+ 2397 069b 4144435F 		.ascii	"ADC_SAR_Seq_1_SAR_shift\000"
+ 2397      5341525F 
+ 2397      5365715F 
+ 2397      315F5341 
+ 2397      525F7368 
+ 2398              	.LASF12:
+ 2399 06b3 696E7431 		.ascii	"int16\000"
+ 2399      3600
+ 2400              	.LASF65:
+ 2401 06b9 4379446D 		.ascii	"CyDmaChSetInitialTd\000"
+ 2401      61436853 
+ 2401      6574496E 
+ 2401      69746961 
+ 2401      6C546400 
+ 2402              	.LASF18:
+ 2403 06cd 63797374 		.ascii	"cystatus\000"
+ 2403      61747573 
+ 2403      00
+ 2404              	.LASF84:
+ARM GAS  C:\Users\chris\AppData\Local\Temp\ccQmEsxZ.s 			page 59
+
+
+ 2405 06d6 433A5C55 		.ascii	"C:\\Users\\chris\\Documents\\PSoC Creator\\FP\\FP.c"
+ 2405      73657273 
+ 2405      5C636872 
+ 2405      69735C44 
+ 2405      6F63756D 
+ 2406 0703 7964736E 		.ascii	"ydsn\000"
+ 2406      00
+ 2407              	.LASF38:
+ 2408 0708 4144435F 		.ascii	"ADC_SAR_Seq_1_SetOffset\000"
+ 2408      5341525F 
+ 2408      5365715F 
+ 2408      315F5365 
+ 2408      744F6666 
+ 2409              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.9.3 20150303 (release) [ARM/embedded-4_9-br
